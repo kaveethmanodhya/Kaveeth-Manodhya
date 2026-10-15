@@ -127,9 +127,17 @@ export default function Portfolio() {
               </h2>
               <div className="new-about-bottom">
                 <p>
-                  I am Kaveeth, an Applied Sciences undergraduate at Wayamba University of Sri Lanka,
-                  a programmer, and a photographer. My work brings together the technical side of
-                  building things and the human side of telling stories.
+                  I am Kaveeth Manodhya, an Applied Sciences undergraduate at Wayamba University
+                  of Sri Lanka with a strong interest in programming, technology, and creative media.
+                  I enjoy turning ideas into useful digital experiences, from developing websites
+                  and working with software to finding fresh ways to solve technical problems.
+                </p>
+                <p>
+                  Beyond coding, photography and visual storytelling are an important part of
+                  what I do. Through my creative work, I explore composition, editing, design,
+                  and the details that make an experience memorable. I am always learning,
+                  experimenting with new tools, and finding ways to bring technical thinking
+                  and creativity together.
                 </p>
                 <a href="#expertise">WHAT I DO <ArrowDownRight size={18} /></a>
               </div>
@@ -173,6 +181,19 @@ export default function Portfolio() {
           <div className="new-section-top"><span>04 / MY JOURNEY</span></div>
           <h2 className="new-big-title">SO FAR<span>.</span></h2>
         </Reveal>
+
+        <div className="new-stats" aria-label="Portfolio statistics">
+          {[
+            { number: '6+', label: 'Years Experience' },
+            { number: '150+', label: 'Various Projects' },
+            { number: '100+', label: 'Happy Customers' },
+          ].map(item => (
+            <Reveal key={item.label} className="new-stat">
+              <strong>{item.number}</strong>
+              <span>{item.label}</span>
+            </Reveal>
+          ))}
+        </div>
 
         <div className="new-journey-grid">
           <Reveal className="new-journey-image">
