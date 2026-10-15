@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import {
   motion,
@@ -106,6 +106,86 @@ export default function MatchCutIntro() {
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
+
+  // Idle autoplay moves the actual page scroll, never a separate fake timeline.
+  // Any user intent immediately cancels it and manual scroll stays in charge.
+  useEffect(() => {
+    if (reduceMotion) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const section = sectionRef.current;
+    if (!section) return;
+    if (window.location.hash && window.location.hash !== '#home') return;
+    if (window.scrollY > 4) return;
+
+    let frame = 0;
+    let timer = 0;
+    let previousTime = 0;
+    let cancelled = false;
+    const startDelay = 1600;
+    const speed = 95; // pixels per second, deliberately unhurried
+    const maxDuration = 54000; // protective timeout, not an animation duration
+    const startedAt = performance.now();
+
+    const stop = () => {
+      if (cancelled) return;
+      cancelled = true;
+      window.clearTimeout(timer);
+      window.cancelAnimationFrame(frame);
+    };
+
+    const stopOnKey = (event: KeyboardEvent) => {
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' ', 'Spacebar'].includes(event.key)) stop();
+    };
+    const stopOnPointer = (event: PointerEvent) => {
+      if (event.pointerType === 'touch' || event.pointerType === 'pen') stop();
+      else if (event.target instanceof Element && event.target.closest('a, button, input, textarea, select')) stop();
+    };
+    const stopOnHash = () => stop();
+
+    window.addEventListener('wheel', stop, { passive: true });
+    window.addEventListener('touchstart', stop, { passive: true });
+    window.addEventListener('keydown', stopOnKey);
+    window.addEventListener('pointerdown', stopOnPointer);
+    window.addEventListener('hashchange', stopOnHash);
+    window.addEventListener('popstate', stopOnHash);
+
+    const animate = (now: number) => {
+      if (cancelled) return;
+      if (!previousTime) previousTime = now;
+      const delta = Math.min(now - previousTime, 50);
+      previousTime = now;
+      const pageStart = section.getBoundingClientRect().top + window.scrollY;
+      const scrollable = section.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) { stop(); return; }
+
+      // Finish after portrait and details are fully revealed.
+      const finish = pageStart + scrollable * 0.99;
+      const current = window.scrollY;
+      if (current >= finish - 0.5) { stop(); return; }
+      if (performance.now() - startedAt > maxDuration) { stop(); return; }
+      const next = Math.min(finish, current + speed * delta / 1000);
+      window.dispatchEvent(new CustomEvent<number>('portfolio:autoplay-scroll', { detail: next }));
+      // Native fallback for reduced-motion/coarse-pointer configurations
+      // where SmoothScroll intentionally does not mount Lenis.
+      if (Math.abs(window.scrollY - next) > 1) window.scrollTo({ top: next, behavior: 'instant' });
+      frame = window.requestAnimationFrame(animate);
+    };
+
+    timer = window.setTimeout(() => {
+      if (!cancelled) frame = window.requestAnimationFrame(animate);
+    }, startDelay);
+
+    return () => {
+      stop();
+      window.removeEventListener('wheel', stop);
+      window.removeEventListener('touchstart', stop);
+      window.removeEventListener('keydown', stopOnKey);
+      window.removeEventListener('pointerdown', stopOnPointer);
+      window.removeEventListener('hashchange', stopOnHash);
+      window.removeEventListener('popstate', stopOnHash);
+    };
+  }, [reduceMotion]);
+
 
   const openingOpacity = useTransform(scrollYProgress, [0, 0.065, SKILL_START], [1, 1, 0]);
   const openingScale = useTransform(scrollYProgress, [0, SKILL_START], [1, 1.08]);
