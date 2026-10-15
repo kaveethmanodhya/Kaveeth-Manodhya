@@ -4,7 +4,7 @@ import { useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowDownRight, Menu, X, Github, Linkedin } from 'lucide-react';
-import ScrollFilm from '../components/ScrollFilm';
+import MatchCutIntro from '../components/MatchCutIntro';
 import SmoothScroll from '../components/SmoothScroll';
 import Contact from '../components/Contact';
 import HorizontalProjects from '../components/HorizontalProjects';
@@ -114,7 +114,7 @@ export default function Portfolio() {
         )}
       </header>
 
-      <ScrollFilm />
+      <MatchCutIntro />
 
       <section id="about" className="new-section new-about">
         <Reveal>
