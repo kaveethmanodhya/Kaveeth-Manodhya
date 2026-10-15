@@ -34,9 +34,21 @@ export default function SmoothScroll() {
       history.pushState(null, '', id);
       lenis.scrollTo(destination, { offset: -76, duration: 1.6 });
     };
+    // MatchCutIntro sends measured scroll offsets here while autoplay runs.
+    // Route them through Lenis to keep its internal position in sync with the
+    // actual scrollbar, so the user's first wheel input takes over smoothly.
+    const onAutoplayScroll = (event: Event) => {
+      const scrollEvent = event as CustomEvent<number>;
+      const top = scrollEvent.detail;
+      if (typeof top !== 'number' || !Number.isFinite(top)) return;
+      scrollEvent.preventDefault();
+      lenis.scrollTo(top, { immediate: true, force: true });
+    };
+    window.addEventListener('portfolio:autoplay-scroll', onAutoplayScroll);
     document.addEventListener('click', onAnchorClick);
 
     return () => {
+      window.removeEventListener('portfolio:autoplay-scroll', onAutoplayScroll);
       document.removeEventListener('click', onAnchorClick);
       cancelAnimationFrame(frame);
       lenis.destroy();
