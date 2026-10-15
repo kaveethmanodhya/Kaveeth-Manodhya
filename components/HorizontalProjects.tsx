@@ -5,29 +5,52 @@ import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
-// Add new project objects here. The scroll distance is measured from the
-// rendered cards, so there are no hard-coded project counts or scroll widths.
-const projects = [
+// Add new project objects to this list. Horizontal scroll distance is
+// measured from the rendered cards, so future projects work automatically.
+type Project = {
+  name: string;
+  category: string;
+  image: string;
+  description: string;
+  url?: string;
+  isOngoing?: boolean;
+};
+
+const projects: Project[] = [
   {
     name: 'Ceylon Gate',
-    category: 'TRAVEL & WEB DEVELOPMENT',
+    category: 'WEB DEVELOPMENT',
     image: '/ceylongate.png',
     url: 'https://ceylongate.com',
-    description: 'A modern travel website presenting Sri Lanka through destinations, tours, and thoughtful web design.',
+    description: 'A travel and tourism website featuring destinations, tour experiences, and a modern browsing experience.',
   },
   {
-    name: 'KodexLK',
+    name: 'KodexLK Platform',
     category: 'DIGITAL SERVICES & WEB SOLUTIONS',
     image: '/kodexlk-logo.webp',
     url: 'https://kodexlk.online',
-    description: 'A creative digital services platform offering website development, design, and customised online solutions.',
+    description: 'A digital services platform offering website development, creative design, and customised online solutions.',
   },
   {
-    name: 'Alpha Crew',
-    category: 'PHOTOGRAPHY & WEB',
+    name: 'Alpha Crew Website',
+    category: 'PHOTOGRAPHY & WEB DEVELOPMENT',
     image: '/alpha-crew.png',
     url: 'https://alphacrewweb.vercel.app',
-    description: 'Photography, visual storytelling, and a digital home for a growing creative brand.',
+    description: 'The online portfolio for Alpha Crew Photography, presenting portraits, events, and visual storytelling.',
+  },
+  {
+    name: 'Portfolio Website',
+    category: 'PERSONAL WEB DEVELOPMENT',
+    image: '/profile-v2.webp',
+    url: 'https://kaveeth-manodhya.vercel.app',
+    description: 'My personal portfolio showcasing selected projects, technical skills, creative work, and professional experience.',
+  },
+  {
+    name: 'Travel & Tours Platform',
+    category: 'WEB DEVELOPMENT / IN PROGRESS',
+    image: '/tourism-ongoing.png',
+    description: 'An upcoming travel platform designed to make exploring destinations and planning trips more convenient.',
+    isOngoing: true,
   },
 ];
 
@@ -128,14 +151,9 @@ export default function HorizontalProjects() {
             className="horizontal-projects__track"
             style={{ x: geometry.enabled ? x : 0 }}
           >
-            {projects.map((project, index) => (
-              <article className="horizontal-projects__card" key={project.name}>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`View ${project.name}`}
-                >
+            {projects.map((project, index) => {
+              const content = (
+                <>
                   <div className="horizontal-projects__image">
                     <Image
                       src={project.image}
@@ -143,19 +161,44 @@ export default function HorizontalProjects() {
                       fill
                       sizes="(max-width: 767px) 86vw, (max-width: 1200px) 48vw, 580px"
                     />
-                    <span className="horizontal-projects__open" aria-hidden="true">
-                      <ArrowUpRight size={25} />
-                    </span>
+                    {project.isOngoing ? (
+                      <span className="horizontal-projects__coming-soon">COMING SOON</span>
+                    ) : (
+                      <span className="horizontal-projects__open" aria-hidden="true">
+                        <ArrowUpRight size={25} />
+                      </span>
+                    )}
                   </div>
                   <div className="horizontal-projects__metadata">
                     <span>{String(index + 1).padStart(2, '0')} / {project.category}</span>
-                    <ArrowUpRight size={18} aria-hidden="true" />
+                    {!project.isOngoing && <ArrowUpRight size={18} aria-hidden="true" />}
                   </div>
                   <h3>{project.name}</h3>
                   <p>{project.description}</p>
-                </a>
-              </article>
-            ))}
+                </>
+              );
+
+              return (
+                <article
+                  className="horizontal-projects__card"
+                  data-ongoing={project.isOngoing ? 'true' : undefined}
+                  key={project.name}
+                >
+                  {project.url ? (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.name}`}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div className="horizontal-projects__card-content">{content}</div>
+                  )}
+                </article>
+              );
+            })}
           </motion.div>
         </div>
 
