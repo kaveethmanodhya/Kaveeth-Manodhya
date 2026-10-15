@@ -7,32 +7,7 @@ import { ArrowUpRight, ArrowDownRight, Menu, X, Github, Linkedin } from 'lucide-
 import ScrollFilm from '../components/ScrollFilm';
 import SmoothScroll from '../components/SmoothScroll';
 import Contact from '../components/Contact';
-
-// Add future projects here. Each project becomes its own vertical row.
-// The list grows naturally with the page without introducing horizontal scrolling.
-const projects = [
-  {
-    name: 'Ceylon Gate',
-    kind: 'TRAVEL & WEB DEVELOPMENT',
-    image: '/ceylongate.png',
-    url: 'https://ceylongate.com',
-    text: 'A modern travel website presenting Sri Lanka through destinations, tours, and thoughtful web design.',
-  },
-  {
-    name: 'KodexLK',
-    kind: 'DIGITAL SERVICES & WEB SOLUTIONS',
-    image: '/kodexlk-logo.webp',
-    url: 'https://kodexlk.online',
-    text: 'A creative digital services platform offering website development, design, and customised online solutions.',
-  },
-  {
-    name: 'Alpha Crew',
-    kind: 'PHOTOGRAPHY & WEB',
-    image: '/alpha-crew.png',
-    url: 'https://alphacrewweb.vercel.app',
-    text: 'Photography, visual storytelling, and a digital home for a growing creative brand.',
-  },
-];
+import HorizontalProjects from '../components/HorizontalProjects';
 
 const disciplines = [
   {
@@ -185,48 +160,7 @@ export default function Portfolio() {
         ))}
       </section>
 
-      <section id="work" className="new-section new-work">
-        <Reveal>
-          <div className="new-section-top"><span>03 / SELECTED WORK</span></div>
-          <div className="new-work-header">
-            <h2 className="new-big-title">THE <em>WORK.</em></h2>
-          </div>
-        </Reveal>
-
-        <div className="new-project-grid">
-          {projects.map(project => (
-            <Reveal key={project.name} className="new-project">
-              <a
-                className="new-project-link"
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={'View ' + project.name + ' project'}
-              >
-                <div className="new-project-image">
-                  <Image
-                    src={project.image}
-                    alt={project.name + ' project preview'}
-                    fill
-                    sizes="(max-width: 720px) 100vw, 40vw"
-                  />
-                  <span className="new-project-view" aria-hidden="true">
-                    <ArrowUpRight size={25} />
-                  </span>
-                </div>
-                <div className="new-project-information">
-                  <p className="new-project-category">{project.kind}</p>
-                  <h3>{project.name}</h3>
-                  <p className="new-project-description">{project.text}</p>
-                  <span className="new-project-action">
-                    VIEW PROJECT <ArrowUpRight size={17} />
-                  </span>
-                </div>
-              </a>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <HorizontalProjects />
 
       <section className="new-manifesto">
         <Reveal>
