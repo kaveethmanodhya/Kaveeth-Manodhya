@@ -122,7 +122,7 @@ export default function MatchCutIntro() {
     let previousTime = 0;
     let cancelled = false;
     const startDelay = 1600;
-    const autoplayDuration = 22000; // approximate time to reach the portrait
+    const autoplayDuration = 17000; // approximate time to reach the portrait
     const maxDuration = 35000; // protective timeout
     const startedAt = performance.now();
 
