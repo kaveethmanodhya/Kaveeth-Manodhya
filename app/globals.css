@@ -557,7 +557,7 @@ html { scroll-behavior: auto; }
 .film-word__outline, .film-reveal__intro, .film-opening__footer { display: none !important; }
 .film-opening h1 { font-size: clamp(64px, 9.5vw, 150px); }
 .film-scroll-hint { display: inline-flex; align-items: center; justify-content: center; gap: 11px; color: #C9BEC9; font-size: 11px; letter-spacing: .15em; margin-top: 24px; }
-.film-word--minimal { left: 50%; top: 50%; width: 100%; max-width: none; margin: 0; padding: 0 40px; gap: 0; transform-origin: center; }
+.film-word--minimal { inset: 0; width: 100%; height: 100%; max-width: none; margin: 0; padding: 0 40px; gap: 0; display: flex; align-items: center; justify-content: center; transform-origin: center center; }
 .film-word--minimal strong { display: block; width: 100%; max-width: 100%; text-align: center; font-size: clamp(54px, 9vw, 142px); letter-spacing: -.075em; line-height: 1.12; overflow-wrap: normal; word-break: normal; }
 .film-reveal__copy h2 { font-size: clamp(55px, 6vw, 110px); }
 .film-reveal__sub { margin: 25px 0; }
@@ -568,13 +568,13 @@ html { scroll-behavior: auto; }
 .new-project p { max-width: 95%; }
 @media (max-width: 850px) {
  .film-track { height: 540vh; }
- .film-word--minimal { left:50%; padding: 0 25px; margin:0; }
+ .film-word--minimal { inset: 0; padding: 0 25px; margin: 0; }
  .film-word--minimal strong { font-size: clamp(43px, 9vw, 85px); }
  .film-reveal__copy h2 { font-size: clamp(48px, 9vw, 86px); }
 }
 @media (max-width: 580px) {
  .film-track { height: 495vh; }
- .film-word--minimal { left:50%; padding:0 12px; margin:0; }
+ .film-word--minimal { inset: 0; padding: 0 12px; margin: 0; }
  .film-word--minimal strong { font-size: clamp(33px, 9.2vw, 53px); overflow-wrap: anywhere; }
  .film-opening h1 { font-size: clamp(48px, 12vw, 75px); }
  .film-scroll-hint { margin-top:20px; font-size:10px; }
