@@ -49,6 +49,40 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/*
+          Disable native scroll restoration before hydration on reload.
+          Reset again at pageshow because Safari can otherwise restore the
+          previous scroll offset after the page has begun rendering.
+          Direct links to #sections still work on first navigation.
+        */}
+        <script
+          id="reset-scroll-on-refresh"
+          dangerouslySetInnerHTML={{
+            __html: `(function () {
+              var entry = window.performance && window.performance.getEntriesByType
+                ? window.performance.getEntriesByType('navigation')[0]
+                : null;
+              var isReload = !!(entry && entry.type === 'reload');
+              if (!isReload) return;
+              if ('scrollRestoration' in window.history) {
+                window.history.scrollRestoration = 'manual';
+              }
+              // On refresh, #work or #about must not jump past the intro.
+              if (window.location.hash) {
+                window.history.replaceState(
+                  window.history.state,
+                  '',
+                  window.location.pathname + window.location.search
+                );
+              }
+              function resetScroll() {
+                window.scrollTo(0, 0);
+              }
+              resetScroll();
+              window.addEventListener('pageshow', resetScroll, { once: true });
+            })();`,
+          }}
+        />
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
           rel="stylesheet"
