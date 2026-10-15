@@ -122,8 +122,8 @@ export default function MatchCutIntro() {
     let previousTime = 0;
     let cancelled = false;
     const startDelay = 1600;
-    const speed = 95; // pixels per second, deliberately unhurried
-    const maxDuration = 54000; // protective timeout, not an animation duration
+    const autoplayDuration = 22000; // approximate time to reach the portrait
+    const maxDuration = 35000; // protective timeout
     const startedAt = performance.now();
 
     const stop = () => {
@@ -163,6 +163,7 @@ export default function MatchCutIntro() {
       const current = window.scrollY;
       if (current >= finish - 0.5) { stop(); return; }
       if (performance.now() - startedAt > maxDuration) { stop(); return; }
+      const speed = (scrollable * 0.99) / (autoplayDuration / 1000);
       const next = Math.min(finish, current + speed * delta / 1000);
       window.dispatchEvent(new CustomEvent<number>('portfolio:autoplay-scroll', { detail: next }));
       // Native fallback for reduced-motion/coarse-pointer configurations
