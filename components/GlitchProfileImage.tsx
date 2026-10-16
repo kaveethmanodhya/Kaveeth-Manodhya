@@ -130,7 +130,7 @@ export default function GlitchProfileImage({ startGlitch }: { startGlitch: boole
         opacity: isNormalPhase ? 1 : 0, 
         transition: 'opacity 0.0s' 
       }}>
-        <Image src="/profile-v2.webp" alt="Kaveeth Manodhya" fill className="profile-mask" style={{ objectFit: 'contain' }} priority />
+        <Image src="/profile-pic.png" alt="Kaveeth Manodhya" fill className="profile-mask" style={{ objectFit: 'contain' }} priority />
       </div>
 
       {/* Initial Glitch Phase */}
@@ -140,13 +140,13 @@ export default function GlitchProfileImage({ startGlitch }: { startGlitch: boole
           style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 3 }}
         >
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 0, 100% 0, 100% 30%, 0 30%)', transform: 'translateX(-10px)', filter: 'hue-rotate(90deg)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 1" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 1" fill style={{ objectFit: 'contain' }} priority />
           </div>
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 30%, 100% 30%, 100% 70%, 0 70%)', transform: 'translateX(10px)', filter: 'invert(1)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 2" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 2" fill style={{ objectFit: 'contain' }} priority />
           </div>
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 70%, 100% 70%, 100% 100%, 0 100%)', transform: 'translateY(-10px)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 3" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 3" fill style={{ objectFit: 'contain' }} priority />
           </div>
         </motion.div>
       )}
@@ -158,16 +158,16 @@ export default function GlitchProfileImage({ startGlitch }: { startGlitch: boole
           style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 3 }}
         >
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 0, 100% 0, 100% 25%, 0 25%)', transform: 'translateX(25px)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 1" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 1" fill style={{ objectFit: 'contain' }} priority />
           </div>
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 25%, 100% 25%, 100% 50%, 0 50%)', transform: 'translateX(-25px)', filter: 'hue-rotate(90deg)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 2" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 2" fill style={{ objectFit: 'contain' }} priority />
           </div>
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 50%, 100% 50%, 100% 75%, 0 75%)', transform: 'translateX(30px) scale(1.1)', filter: 'invert(1)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 3" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 3" fill style={{ objectFit: 'contain' }} priority />
           </div>
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 75%, 100% 75%, 100% 100%, 0 100%)', transform: 'translateY(15px)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 4" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 4" fill style={{ objectFit: 'contain' }} priority />
           </div>
         </motion.div>
       )}
@@ -213,13 +213,13 @@ export default function GlitchProfileImage({ startGlitch }: { startGlitch: boole
           style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 3 }}
         >
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 0, 100% 0, 100% 40%, 0 40%)', transform: 'translateX(15px)', filter: 'hue-rotate(-90deg)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 1" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 1" fill style={{ objectFit: 'contain' }} priority />
           </div>
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 40%, 100% 40%, 100% 60%, 0 60%)', transform: 'translateX(-15px)', filter: 'hue-rotate(180deg)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 2" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 2" fill style={{ objectFit: 'contain' }} priority />
           </div>
           <div style={{ position: 'absolute', inset: 0, clipPath: 'polygon(0 60%, 100% 60%, 100% 100%, 0 100%)', transform: 'translateY(10px)' }}>
-             <Image src="/profile-v2.webp" alt="Glitch 3" fill style={{ objectFit: 'contain' }} priority />
+             <Image src="/profile-pic.png" alt="Glitch 3" fill style={{ objectFit: 'contain' }} priority />
           </div>
         </motion.div>
       )}
