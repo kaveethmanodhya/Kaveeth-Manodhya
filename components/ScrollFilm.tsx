@@ -107,7 +107,7 @@ export default function ScrollFilm() {
           <a className="round-link" href="#work">Discover my work <ArrowUpRight size={18} /></a>
         </div>
         <div className="film-reduced__photo">
-          <Image src="/profile-v2.webp" alt="Portrait of Kaveeth Manodhya" fill sizes="(max-width: 760px) 100vw, 48vw" priority />
+          <Image src="/profile-pic.png" alt="Portrait of Kaveeth Manodhya" fill sizes="(max-width: 760px) 100vw, 48vw" priority />
         </div>
       </section>
     );
@@ -132,7 +132,7 @@ export default function ScrollFilm() {
         <motion.div className="film-reveal" style={{ opacity: portraitOpacity }}>
           <motion.div className="film-reveal__portrait" style={{ clipPath: portraitClip, scale: portraitScale }}>
             <Image
-              src="/profile-v2.webp"
+              src="/profile-pic.png"
               alt="Portrait of Kaveeth Manodhya"
               fill
               priority

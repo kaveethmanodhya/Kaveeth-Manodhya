@@ -41,7 +41,7 @@ const projects: Project[] = [
   {
     name: 'Portfolio Website',
     category: 'PERSONAL WEB DEVELOPMENT',
-    image: '/profile-v2.webp',
+    image: '/profile-pic.png',
     url: 'https://kaveeth-manodhya.vercel.app',
     description: 'My personal portfolio showcasing selected projects, technical skills, creative work, and professional experience.',
   },

@@ -50,7 +50,7 @@ const workItems: WorkItem[] = [
   {
     title: 'Portfolio Website',
     category: 'Web Development',
-    image: '/profile-v2.webp',
+    image: '/profile-pic.png',
     url: 'https://kaveeth-manodhya.vercel.app',
     githubUrl: 'https://github.com/kaveeth555/Kaveeth-Manodhya',
     description: 'Personal portfolio showcasing skills, projects & professional experience.',

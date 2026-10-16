@@ -246,7 +246,7 @@ export default function MatchCutIntro() {
         </div>
         <div className="mc-static__portrait">
           <Image
-            src="/profile-v2.webp"
+            src="/profile-pic.png"
             fill
             priority
             alt="Portrait of Kaveeth Manodhya"
@@ -328,7 +328,7 @@ export default function MatchCutIntro() {
             style={{ opacity: portraitOpacity, clipPath: portraitClip, scale: portraitScale }}
           >
             <Image
-              src="/profile-v2.webp"
+              src="/profile-pic.png"
               fill
               priority
               alt="Portrait of Kaveeth Manodhya"

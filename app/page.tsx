@@ -198,7 +198,7 @@ export default function Portfolio() {
         <div className="new-journey-grid">
           <Reveal className="new-journey-image">
             <Image
-              src="/profile-v2.webp"
+              src="/profile-pic.png"
               fill
               sizes="(max-width: 850px) 90vw, 35vw"
               alt="Portrait of Kaveeth Manodhya"
