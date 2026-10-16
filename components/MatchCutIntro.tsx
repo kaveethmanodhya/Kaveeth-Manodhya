@@ -31,6 +31,8 @@ const SKILLS = [
 const SKILL_START = 0.13;
 const SKILL_END = 0.745;
 const SEGMENT = (SKILL_END - SKILL_START) / SKILLS.length;
+// Sparse lines create a quiet sense of vertical movement during the pinned intro.
+const FLOW_COLUMNS = [7, 17, 30, 70, 83, 93] as const;
 
 function MatchCutWord({
   word,
@@ -196,6 +198,18 @@ export default function MatchCutIntro() {
   const ambientOpacity = useTransform(scrollYProgress, [0, 0.28, 0.73, 0.93], [0.1, 0.18, 0.2, 0.08]);
   const ambientScale = useTransform(scrollYProgress, [0, 0.75, 1], [0.8, 1.2, 0.9]);
 
+  // Background streaks travel down in two layers. All motion is driven by
+  // actual scroll progress, so autoplay and manual scrolling remain in sync.
+  const farLinesY = useTransform(scrollYProgress, [0, 1], [-220, 440]);
+  const nearLinesY = useTransform(scrollYProgress, [0, 1], [-420, 740]);
+  const linesOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.09, 0.64, 0.83, 0.96, 1],
+    [0.2, 0.6, 0.66, 0.35, 0, 0]
+  );
+  const meterOpacity = useTransform(scrollYProgress, [0, 0.78, 0.92, 1], [0.85, 0.85, 0.3, 0]);
+  const meterFill = useTransform(scrollYProgress, [0, 1], [0.02, 1]);
+
   const nameOpacity = useTransform(scrollYProgress, [0.752, 0.82, 1], [0, 1, 1]);
   const nameY = useTransform(scrollYProgress, [0.752, 0.845], [70, 0]);
   const nameScale = useTransform(scrollYProgress, [0.752, 0.88], [0.91, 1]);
@@ -250,6 +264,26 @@ export default function MatchCutIntro() {
           style={{ x: ambientX, opacity: ambientOpacity, scale: ambientScale }}
           aria-hidden="true"
         />
+
+        <motion.div className="mc-flow" style={{ opacity: linesOpacity }} aria-hidden="true">
+          <motion.div className="mc-flow__layer mc-flow__layer--far" style={{ y: farLinesY }}>
+            {FLOW_COLUMNS.map((position) => (
+              <span className="mc-flow__stream" key={position} style={{ left: `${position}%` }} />
+            ))}
+          </motion.div>
+          <motion.div className="mc-flow__layer mc-flow__layer--near" style={{ y: nearLinesY }}>
+            {FLOW_COLUMNS.map((position) => (
+              <span className="mc-flow__stream" key={position} style={{ left: `${position + 2}%` }} />
+            ))}
+          </motion.div>
+        </motion.div>
+
+        <motion.div className="mc-scroll-meter" style={{ opacity: meterOpacity }} aria-hidden="true">
+          <div className="mc-scroll-meter__track">
+            <motion.span style={{ scaleY: meterFill }} />
+          </div>
+          <span className="mc-scroll-meter__arrow">↓</span>
+        </motion.div>
 
         <motion.div className="mc-opening" style={{ opacity: openingOpacity, scale: openingScale }}>
           <h1>THE ART OF<br /><span>MAKING</span> <em>THINGS.</em></h1>
