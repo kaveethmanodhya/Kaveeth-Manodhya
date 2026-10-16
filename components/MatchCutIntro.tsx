@@ -210,6 +210,13 @@ export default function MatchCutIntro() {
   const meterOpacity = useTransform(scrollYProgress, [0, 0.78, 0.92, 1], [0.85, 0.85, 0.3, 0]);
   const meterFill = useTransform(scrollYProgress, [0, 1], [0.02, 1]);
 
+  // Hide the ENTIRE final scene until its reveal begins. Opacity on the
+  // individual children alone can let the name faintly appear behind earlier
+  // words on some browsers during compositing / scroll restoration.
+  const finalVisibility = useTransform(
+    scrollYProgress,
+    (progress): 'hidden' | 'visible' => progress < 0.75 ? 'hidden' : 'visible'
+  );
   const nameOpacity = useTransform(scrollYProgress, [0.752, 0.82, 1], [0, 1, 1]);
   const nameY = useTransform(scrollYProgress, [0.752, 0.845], [70, 0]);
   const nameScale = useTransform(scrollYProgress, [0.752, 0.88], [0.91, 1]);
@@ -303,7 +310,7 @@ export default function MatchCutIntro() {
           ))}
         </div>
 
-        <div className="mc-final">
+        <motion.div className="mc-final" style={{ visibility: finalVisibility }}>
           <motion.div className="mc-final__identity" style={{ opacity: nameOpacity, y: nameY, scale: nameScale }}>
             <h2>KAVEETH<br /><em>MANODHYA.</em></h2>
             <motion.div className="mc-final__details" style={{ opacity: detailsOpacity, y: detailsY }}>
@@ -329,7 +336,7 @@ export default function MatchCutIntro() {
             />
             <span className="mc-final__shade" aria-hidden="true" />
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
