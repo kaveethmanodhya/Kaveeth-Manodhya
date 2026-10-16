@@ -33,7 +33,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/icon.png?v=5",
+    icon: [{ url: "/icon.svg?v=6", type: "image/svg+xml" }],
+    shortcut: "/icon.svg?v=6",
   },
 };
 
