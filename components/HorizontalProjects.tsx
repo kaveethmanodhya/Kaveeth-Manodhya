@@ -14,6 +14,7 @@ type Project = {
   description: string;
   url?: string;
   isOngoing?: boolean;
+  statusLabel?: string;
 };
 
 const projects: Project[] = [
@@ -64,8 +65,9 @@ const projects: Project[] = [
     category: 'JOB & TALENT MARKETPLACE / ONGOING',
     image: '/verity-project.svg',
     url: 'https://github.com/kaveethmanodhya/Job-Finder',
-    description: 'An in-progress job and talent marketplace concept, exploring immersive 3D interfaces and a more engaging way for opportunities and people to find each other.',
+    description: 'An in-progress job and talent marketplace concept featuring an immersive 3D hero, floating glass cards, and glitch transitions. Job listings, talent profiles, and search remain part of its ongoing development.',
     isOngoing: true,
+    statusLabel: 'IN DEVELOPMENT',
   },
 ];
 
@@ -177,7 +179,7 @@ export default function HorizontalProjects() {
                       sizes="(max-width: 767px) 86vw, (max-width: 1200px) 48vw, 580px"
                     />
                     {project.isOngoing ? (
-                      <span className="horizontal-projects__coming-soon">COMING SOON</span>
+                      <span className="horizontal-projects__coming-soon">{project.statusLabel || "COMING SOON"}</span>
                     ) : (
                       <span className="horizontal-projects__open" aria-hidden="true">
                         <ArrowUpRight size={25} />
