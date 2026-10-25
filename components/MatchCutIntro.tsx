@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import {
   motion,
   useReducedMotion,
+  useMotionValueEvent,
   useScroll,
   useTransform,
   type MotionValue,
@@ -28,7 +29,7 @@ const SKILLS = [
   'STORYTELLING',
 ] as const;
 
-const SKILL_START = 0.13;
+const SKILL_START = 0.08;
 const SKILL_END = 0.745;
 const SEGMENT = (SKILL_END - SKILL_START) / SKILLS.length;
 // Sparse lines create a quiet sense of vertical movement during the pinned intro.
@@ -107,6 +108,20 @@ export default function MatchCutIntro() {
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
+  });
+
+  const [loadingPercent, setLoadingPercent] = useState(0);
+  const [loadingStep, setLoadingStep] = useState(1);
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    const normalized = Math.max(0, Math.min(1, (latest - SKILL_START) / (SKILL_END - SKILL_START)));
+    const percent = Math.round(normalized * 100);
+    const step = Math.min(
+      SKILLS.length,
+      Math.max(1, Math.floor((latest - SKILL_START) / SEGMENT) + 1)
+    );
+    setLoadingPercent((previous) => previous === percent ? previous : percent);
+    setLoadingStep((previous) => previous === step ? previous : step);
   });
 
   // Idle autoplay moves the actual page scroll, never a separate fake timeline.
@@ -190,8 +205,9 @@ export default function MatchCutIntro() {
   }, [reduceMotion]);
 
 
-  const openingOpacity = useTransform(scrollYProgress, [0, 0.065, SKILL_START], [1, 1, 0]);
-  const openingScale = useTransform(scrollYProgress, [0, SKILL_START], [1, 1.08]);
+  const openingOpacity = useTransform(scrollYProgress, [0, 0.035, SKILL_START - 0.005], [1, 1, 0]);
+  const openingScale = useTransform(scrollYProgress, [0, SKILL_START], [1, 1.04]);
+  const loadingUiOpacity = useTransform(scrollYProgress, [0.69, 0.755, 0.81], [1, 1, 0]);
 
   // A restrained parallax glow connects the text frames to the portrait reveal.
   const ambientX = useTransform(scrollYProgress, [0, 0.75, 1], ['-8%', '9%', '0%']);
@@ -292,9 +308,24 @@ export default function MatchCutIntro() {
           <span className="mc-scroll-meter__arrow">↓</span>
         </motion.div>
 
-        <motion.div className="mc-opening" style={{ opacity: openingOpacity, scale: openingScale }}>
-          <h1>THE ART OF<br /><span>MAKING</span> <em>THINGS.</em></h1>
-          <p>SCROLL TO EXPLORE <ArrowDownRight size={16} /></p>
+        <motion.div className="mc-opening mc-loader__intro" style={{ opacity: openingOpacity, scale: openingScale }}>
+          <span className="mc-loader__eyebrow"><i /> PERSONAL PORTFOLIO / INTRO SEQUENCE</span>
+          <h1>LOADING<br /><em>CREATIVE WORK.</em></h1>
+          <p>PREPARING THE EXPERIENCE <ArrowDownRight size={16} /></p>
+        </motion.div>
+
+        <motion.div className="mc-loader-ui" style={{ opacity: loadingUiOpacity }} aria-hidden="true">
+          <div className="mc-loader-ui__top">
+            <span>LOADING PORTFOLIO</span>
+            <span>{String(loadingStep).padStart(2, '0')} <i>/</i> {String(SKILLS.length).padStart(2, '0')}</span>
+          </div>
+          <div className="mc-loader-ui__bar">
+            <motion.span style={{ scaleX: loadingPercent / 100 }} />
+          </div>
+          <div className="mc-loader-ui__bottom">
+            <span>CODE <i>·</i> DESIGN <i>·</i> PHOTOGRAPHY</span>
+            <span>{String(loadingPercent).padStart(2, '0')}%</span>
+          </div>
         </motion.div>
 
         <div className="mc-sequence" aria-hidden="true">
