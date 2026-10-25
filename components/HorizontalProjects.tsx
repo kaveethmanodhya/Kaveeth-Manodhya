@@ -52,6 +52,21 @@ const projects: Project[] = [
     description: 'An upcoming travel platform designed to make exploring destinations and planning trips more convenient.',
     isOngoing: true,
   },
+  {
+    name: 'MediaTools',
+    category: 'BROWSER-BASED MEDIA TOOLKIT',
+    image: '/mediatools-project.svg',
+    url: 'https://mediatoolslk.vercel.app/',
+    description: 'A suite of 11 privacy-focused tools for image conversion, video frame extraction, cropping, watermarking, GIF creation, metadata cleaning, and more. Media files are processed directly in the browser.',
+  },
+  {
+    name: 'Verity',
+    category: 'JOB & TALENT MARKETPLACE / ONGOING',
+    image: '/verity-project.svg',
+    url: 'https://github.com/kaveethmanodhya/Job-Finder',
+    description: 'An in-progress job and talent marketplace concept, exploring immersive 3D interfaces and a more engaging way for opportunities and people to find each other.',
+    isOngoing: true,
+  },
 ];
 
 type Geometry = { enabled: boolean; distance: number; height: number };
