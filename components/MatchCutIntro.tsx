@@ -124,6 +124,25 @@ export default function MatchCutIntro() {
     setLoadingStep((previous) => previous === step ? previous : step);
   });
 
+  // Hide the fixed site chrome while the intro/loading sequence is active.
+  // The navigation and footer return once the portrait reveal is complete.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (reduceMotion) {
+      root.classList.remove('portfolio-intro-loading');
+      return;
+    }
+    const syncChrome = (progress: number) => {
+      root.classList.toggle('portfolio-intro-loading', progress < 0.99);
+    };
+    syncChrome(scrollYProgress.get());
+    const unsubscribe = scrollYProgress.on('change', syncChrome);
+    return () => {
+      unsubscribe();
+      root.classList.remove('portfolio-intro-loading');
+    };
+  }, [reduceMotion, scrollYProgress]);
+
   // Idle autoplay moves the actual page scroll, never a separate fake timeline.
   // Any user intent immediately cancels it and manual scroll stays in charge.
   useEffect(() => {
@@ -310,7 +329,7 @@ export default function MatchCutIntro() {
 
         <motion.div className="mc-opening mc-loader__intro" style={{ opacity: openingOpacity, scale: openingScale }}>
           <span className="mc-loader__eyebrow"><i /> PERSONAL PORTFOLIO / INTRO SEQUENCE</span>
-          <h1>LOADING<br /><em>CREATIVE WORK.</em></h1>
+          <h1>THE ART OF<br /><span>MAKING</span> <em>THINGS.</em></h1>
           <p>PREPARING THE EXPERIENCE <ArrowDownRight size={16} /></p>
         </motion.div>
 
