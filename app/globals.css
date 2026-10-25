@@ -987,3 +987,39 @@ html { scroll-behavior: auto; }
  .mc-loader-ui__top,.mc-loader-ui__bottom{font-size:8px;letter-spacing:.08em;}
 }
 @media(prefers-reduced-motion:reduce){.mc-loader__eyebrow i{animation:none;}}
+
+
+/* Keep the loading intro clean. Site chrome returns after the portrait reveal. */
+html.portfolio-intro-loading .new-nav,
+html.portfolio-intro-loading .new-footer {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-14px);
+  transition: opacity .35s ease, transform .35s ease, visibility .35s ease;
+}
+.new-nav,
+.new-footer {
+  transition: opacity .45s ease, transform .45s ease, visibility .45s ease;
+}
+/* Retain the original hero headline, not a giant LOADING label. */
+.mc-loader__intro h1 {
+  font-size: clamp(56px, 8.2vw, 132px);
+  line-height: .91;
+  letter-spacing: -.075em !important;
+}
+.mc-loader__intro h1 em {
+  font-size: 1em;
+  letter-spacing: -.065em;
+}
+.mc-loader__intro h1 span { color: #FAED26; }
+.mc-loader__intro > p {
+  margin-top: clamp(24px, 4vh, 48px);
+}
+@media(max-width:650px) {
+  .mc-loader__intro h1 { font-size: clamp(43px, 10.5vw, 70px); }
+}
+@media(prefers-reduced-motion:reduce) {
+  html.portfolio-intro-loading .new-nav,
+  html.portfolio-intro-loading .new-footer { transition: none; }
+}
