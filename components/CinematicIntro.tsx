@@ -28,7 +28,7 @@ const CODE_LINES = [
   '// Initializing...',
 ];
 
-export default function CinematicIntro({ onComplete }: { onComplete: () => void }) {
+export default function CinematicIntro({ onComplete, profileImage = '/profile-v2.webp' }: { onComplete: () => void; profileImage?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [phase, setPhase] = useState<'typing' | 'morph' | 'done'>('typing');
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
@@ -43,9 +43,9 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
   // Preload profile image
   useEffect(() => {
     const img = new Image();
-    img.src = '/profile-v2.webp';
+    img.src = profileImage;
     img.onload = () => { imageLoaded.current = img; };
-  }, []);
+  }, [profileImage]);
 
   // Spinner animation
   useEffect(() => {
