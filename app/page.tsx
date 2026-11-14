@@ -153,6 +153,7 @@ export default function Portfolio() {
                   <div className="new-timeline-row">
                     <span>{item.period}</span>
                     <div>
+                      {item.logo && <div className="film-company-logo"><Image src={item.logo} width={42} height={42} alt={item.name+' logo'} /></div>}
                       <h3>{item.name}</h3>
                       <p>{item.role}</p>
                     </div>
