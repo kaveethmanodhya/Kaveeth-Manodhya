@@ -210,17 +210,20 @@
       {
         "period": "2025 — PRESENT",
         "name": "KodexLK",
-        "role": "Founder and Developer"
+        "role": "Founder and Developer",
+        "logo": "/kodexlk-logo.webp"
       },
       {
         "period": "2023 — PRESENT",
         "name": "Alpha Crew Photography",
-        "role": "Founder and Photographer"
+        "role": "Founder and Photographer",
+        "logo": "/alpha-crew.png"
       },
       {
         "period": "2025",
         "name": "Newgen Lanka Healthcare",
-        "role": "Quality Assurance Trainee"
+        "role": "Quality Assurance Trainee",
+        "logo": "/newgen_lanka.png"
       }
     ],
     "education": [
