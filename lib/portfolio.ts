@@ -4,7 +4,7 @@ export const defaultContent: PortfolioContent = defaults;
 export async function getPortfolioContent(): Promise<PortfolioContent> {
   const token = process.env.GITHUB_CONTENT_TOKEN;
   const repo = process.env.GITHUB_CONTENT_REPO || 'kaveethmanodhya/Kaveeth-Manodhya';
-  const branch = process.env.GITHUB_CONTENT_BRANCH || 'main';
+  const branch = process.env.GITHUB_CONTENT_BRANCH || 'redesign/scroll-film-portfolio';
   if (!token) return defaults;
   try {
     const response = await fetch('https://api.github.com/repos/' + repo + '/contents/data/portfolio.json?ref=' + encodeURIComponent(branch), {
