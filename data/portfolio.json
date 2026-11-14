@@ -1,0 +1,278 @@
+{
+  "intro": {
+    "words": [
+      "CREATIVE",
+      "DESIGN",
+      "CODING",
+      "PROGRAMMING",
+      "JAVA",
+      "C++",
+      "NETWORKING",
+      "REACT",
+      "NEXT.JS",
+      "WEB DESIGN",
+      "PHOTOGRAPHY",
+      "STORYTELLING"
+    ],
+    "eyebrow": "PERSONAL PORTFOLIO / INTRO SEQUENCE",
+    "openingTop": "THE ART OF",
+    "openingMiddle": "MAKING",
+    "openingEnd": "THINGS.",
+    "openingHint": "PREPARING THE EXPERIENCE",
+    "nameTop": "KAVEETH",
+    "nameBottom": "MANODHYA.",
+    "roles": "Developer • Designer • Photographer",
+    "location": "Applied Sciences Undergraduate\nWayamba University of Sri Lanka",
+    "portrait": "/profile-pic.png",
+    "aboutButton": "MORE ABOUT ME",
+    "staticEyebrow": "CREATIVE / CODE / PHOTOGRAPHY"
+  },
+  "navigation": {
+    "logo": "KM",
+    "contactButton": "LET'S TALK",
+    "items": [
+      {
+        "name": "About",
+        "href": "#about"
+      },
+      {
+        "name": "Expertise",
+        "href": "#expertise"
+      },
+      {
+        "name": "Work",
+        "href": "#work"
+      },
+      {
+        "name": "Journey",
+        "href": "#journey"
+      },
+      {
+        "name": "Contact",
+        "href": "#contact"
+      }
+    ]
+  },
+  "about": {
+    "label": "01 / THE PERSON",
+    "headingFirst": "I BUILD WITH",
+    "headingFirstAccent": "LOGIC.",
+    "headingSecond": "I CREATE WITH",
+    "headingSecondAccent": "FEELING.",
+    "paragraphs": [
+      "I am Kaveeth Manodhya, an Applied Sciences undergraduate at Wayamba University of Sri Lanka with a strong interest in programming, technology, and creative media. I enjoy turning ideas into useful digital experiences, from developing websites and working with software to finding fresh ways to solve technical problems.",
+      "Beyond coding, photography and visual storytelling are an important part of what I do. Through my creative work, I explore composition, editing, design, and the details that make an experience memorable. I am always learning, experimenting with new tools, and finding ways to bring technical thinking and creativity together."
+    ],
+    "button": "WHAT I DO"
+  },
+  "expertise": {
+    "label": "02 / EXPERTISE",
+    "heading": "WHAT I",
+    "accent": "DO.",
+    "items": [
+      {
+        "num": "01",
+        "title": "DEVELOPMENT",
+        "desc": "Ideas made functional. Java, C, C++, React, Next.js, Node.js, databases, and networking.",
+        "tags": [
+          "Java",
+          "C / C++",
+          "React",
+          "Next.js",
+          "Networking"
+        ]
+      },
+      {
+        "num": "02",
+        "title": "PHOTOGRAPHY",
+        "desc": "The art of seeing. Portraits, events, image editing, retouching, and the stories that linger.",
+        "tags": [
+          "Photography",
+          "Lightroom",
+          "Photoshop",
+          "Retouching"
+        ]
+      },
+      {
+        "num": "03",
+        "title": "DIGITAL SERVICES",
+        "desc": "Web solutions, creative design, media production, and digital experiences tailored to different needs.",
+        "tags": [
+          "Web Solutions",
+          "Graphic Design",
+          "Video",
+          "Creative Services"
+        ]
+      }
+    ]
+  },
+  "work": {
+    "label": "03 / SELECTED WORK",
+    "heading": "THE",
+    "accent": "WORK.",
+    "scrollHint": "SCROLL TO EXPLORE",
+    "footer": "SELECTED WORK",
+    "projects": [
+      {
+        "name": "Ceylon Gate",
+        "category": "WEB DEVELOPMENT",
+        "image": "/ceylongate.png",
+        "url": "https://ceylongate.com",
+        "description": "A travel and tourism website featuring destinations, tour experiences, and a modern browsing experience.",
+        "isOngoing": false,
+        "statusLabel": ""
+      },
+      {
+        "name": "KodexLK Platform",
+        "category": "DIGITAL SERVICES & WEB SOLUTIONS",
+        "image": "/kodexlk-logo.webp",
+        "url": "https://kodexlk.online",
+        "description": "A digital services platform offering website development, creative design, and customised online solutions.",
+        "isOngoing": false,
+        "statusLabel": ""
+      },
+      {
+        "name": "Alpha Crew Website",
+        "category": "PHOTOGRAPHY & WEB DEVELOPMENT",
+        "image": "/alpha-crew.png",
+        "url": "https://alphacrewweb.vercel.app",
+        "description": "The online portfolio for Alpha Crew Photography, presenting portraits, events, and visual storytelling.",
+        "isOngoing": false,
+        "statusLabel": ""
+      },
+      {
+        "name": "Portfolio Website",
+        "category": "PERSONAL WEB DEVELOPMENT",
+        "image": "/profile-pic.png",
+        "url": "https://kaveeth-manodhya.vercel.app",
+        "description": "My personal portfolio showcasing selected projects, technical skills, creative work, and professional experience.",
+        "isOngoing": false,
+        "statusLabel": ""
+      },
+      {
+        "name": "Travel & Tours Platform",
+        "category": "WEB DEVELOPMENT / IN PROGRESS",
+        "image": "/tourism-ongoing.png",
+        "url": "",
+        "description": "An upcoming travel platform designed to make exploring destinations and planning trips more convenient.",
+        "isOngoing": true,
+        "statusLabel": "COMING SOON"
+      },
+      {
+        "name": "MediaTools",
+        "category": "BROWSER-BASED MEDIA TOOLKIT",
+        "image": "/mediatools-project.svg",
+        "url": "https://mediatoolslk.vercel.app/",
+        "description": "A suite of 11 privacy-focused tools for image conversion, video frame extraction, cropping, watermarking, GIF creation, metadata cleaning, and more. Media files are processed directly in the browser.",
+        "isOngoing": false,
+        "statusLabel": ""
+      },
+      {
+        "name": "Verity",
+        "category": "JOB & TALENT MARKETPLACE / ONGOING",
+        "image": "/verity-project.svg",
+        "url": "https://github.com/kaveethmanodhya/Job-Finder",
+        "description": "An in-progress job and talent marketplace concept featuring an immersive 3D hero, floating glass cards, and glitch transitions. Job listings, talent profiles, and search remain part of its ongoing development.",
+        "isOngoing": true,
+        "statusLabel": "IN DEVELOPMENT"
+      }
+    ]
+  },
+  "manifesto": {
+    "lines": [
+      "THE BEST IDEAS",
+      "LIVE",
+      "BETWEEN",
+      "DISCIPLINES"
+    ]
+  },
+  "journey": {
+    "label": "04 / MY JOURNEY",
+    "heading": "SO FAR",
+    "portrait": "/profile-pic.png",
+    "experienceHeading": "Experience",
+    "educationHeading": "Education",
+    "stats": [
+      {
+        "number": "6+",
+        "label": "Years Experience"
+      },
+      {
+        "number": "150+",
+        "label": "Various Projects"
+      },
+      {
+        "number": "100+",
+        "label": "Happy Customers"
+      }
+    ],
+    "experience": [
+      {
+        "period": "2025 — PRESENT",
+        "name": "KodexLK",
+        "role": "Founder and Developer"
+      },
+      {
+        "period": "2023 — PRESENT",
+        "name": "Alpha Crew Photography",
+        "role": "Founder and Photographer"
+      },
+      {
+        "period": "2025",
+        "name": "Newgen Lanka Healthcare",
+        "role": "Quality Assurance Trainee"
+      }
+    ],
+    "education": [
+      {
+        "period": "2025 — PRESENT",
+        "name": "Wayamba University of Sri Lanka",
+        "qualification": "B.Sc. Applied Sciences undergraduate",
+        "image": "/wayamba_uni.png"
+      },
+      {
+        "period": "2013 — 2021",
+        "name": "Bandaranayake College, Gampaha",
+        "qualification": "Secondary Education",
+        "image": "/bandaranayake_college.png"
+      }
+    ]
+  },
+  "contact": {
+    "label": "05 / SAY HELLO",
+    "headingOne": "GOT AN",
+    "headingAccentOne": "IDEA?",
+    "headingTwo": "LET'S MAKE",
+    "headingAccentTwo": "IT REAL.",
+    "formEyebrow": "— Get In Touch",
+    "formTop": "Let's",
+    "formBottom": "Talk.",
+    "formDescription": "Have a project in mind, or just want to connect? Send a message and I'll get back to you.",
+    "socialLinks": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/kaveethmanodhya"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/kaveeth-manodhya-b3917330a"
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© 2026 KAVEETH MANODHYA",
+    "backToTop": "BACK TO TOP ↑"
+  },
+  "seo": {
+    "title": "Kaveeth Manodhya — Developer, Designer & Content Creator",
+    "description": "Personal portfolio of Kaveeth Manodhya — undergraduate at Wayamba University of Sri Lanka, full-stack developer, photographer, and YouTube content creator (Mr Kavvy).",
+    "keywords": [
+      "Kaveeth Manodhya",
+      "Mr Kavvy",
+      "portfolio",
+      "developer",
+      "photographer",
+      "Sri Lanka"
+    ]
+  }
+}
