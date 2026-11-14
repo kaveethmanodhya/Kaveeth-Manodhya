@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPortfolioContent } from "../lib/portfolio";
 import { Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,28 +15,20 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "Kaveeth Manodhya — Developer, Designer & Content Creator",
-  description:
-    "Personal portfolio of Kaveeth Manodhya — undergraduate at Wayamba University of Sri Lanka, full-stack developer, photographer, and YouTube content creator (Mr Kavvy).",
-  keywords: [
-    "Kaveeth Manodhya",
-    "Mr Kavvy",
-    "portfolio",
-    "developer",
-    "photographer",
-    "Sri Lanka",
-  ],
-  openGraph: {
-    title: "Kaveeth Manodhya — Developer, Designer & Content Creator",
-    description:
-      "Kaveeth Manodhya's personal portfolio showcasing projects, experience, and creative work.",
-    type: "website",
-  },
-  icons: {
-    icon: "/icon.png?v=5",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getPortfolioContent();
+  return {
+    title: seo.title,
+    description: seo.description,
+    keywords: seo.keywords,
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      type: "website"
+    },
+    icons: { icon: "/icon.png?v=5" }
+  };
+}
 
 export default function RootLayout({
   children,
