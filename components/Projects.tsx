@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import type { PortfolioContent } from '../lib/portfolio';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 
@@ -17,58 +18,9 @@ interface WorkItem {
   isOngoing?: boolean;
 }
 
-const workItems: WorkItem[] = [
-  {
-    title: 'Ceylon Gate',
-    category: 'Web Development',
-    image: '/ceylongate.png',
-    url: 'https://ceylongate.com',
-    description: 'Travel and tourism website for Ceylon Gate, showcasing tours, destinations, and booking capabilities.',
-    tags: ['Next.js', 'PostgreSQL', 'Framer Motion', 'Cloudinary'],
-    accentColor: '#ff4d8d',
-  },
-  {
-    title: 'Kodexlk Platform',
-    category: 'Web Platform',
-    image: '/kodexlk-logo.webp',
-    url: 'https://kodexlk.online',
-    githubUrl: 'https://github.com/kaveethmanodhya/Kodexlk',
-    description: 'Modern web platform & admin dashboard for digital invitations and event management.',
-    tags: ['Next.js', 'MongoDB', 'Cloudinary'],
-    accentColor: '#00d4ff',
-  },
-  {
-    title: 'Alpha Crew Website',
-    category: 'Web Development',
-    image: '/alpha-crew.png',
-    url: 'https://alphacrewweb.vercel.app',
-    githubUrl: 'https://github.com/kaveeth555/ALPHA-Crew-Website',
-    description: 'Official portfolio website for Alpha Crew Photography — event, portrait & lifestyle photography brand.',
-    tags: ['Next.js', 'React', 'Cloudinary'],
-    accentColor: '#4f8ef7',
-  },
-  {
-    title: 'Portfolio Website',
-    category: 'Web Development',
-    image: '/profile-v2.webp',
-    url: 'https://kaveeth-manodhya.vercel.app',
-    githubUrl: 'https://github.com/kaveeth555/Kaveeth-Manodhya',
-    description: 'Personal portfolio showcasing skills, projects & professional experience.',
-    tags: ['Next.js', 'GSAP', 'Framer Motion'],
-    accentColor: '#a259ff',
-  },
-  {
-    title: 'Travel & Tours Platform',
-    category: 'Web Development (Ongoing)',
-    image: '/tourism-ongoing.png',
-    description: 'An upcoming comprehensive tourism platform currently in development, focusing on seamless travel experiences.',
-    tags: ['Next.js', 'React', 'Tailwind CSS'],
-    accentColor: '#f59e0b',
-    isOngoing: true,
-  },
-];
 
-export default function Projects() {
+export default function Projects({items,headings}:{items: PortfolioContent['projects'];headings:PortfolioContent['headings']}) {
+  const workItems: WorkItem[] = items;
   const targetRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -130,7 +82,7 @@ export default function Projects() {
             marginBottom: '4vh'
           }}
         >
-          <p className="section-number" style={{ marginBottom: 12 }}>— Selected Work</p>
+          <p className="section-number" style={{ marginBottom: 12 }}>{headings.projectsEyebrow}</p>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20 }}>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}>
               My Work<span className="gradient-text">.</span>
