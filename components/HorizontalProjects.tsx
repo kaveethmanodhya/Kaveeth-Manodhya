@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import type { PortfolioContent } from '../lib/portfolio';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -17,63 +18,11 @@ type Project = {
   statusLabel?: string;
 };
 
-const projects: Project[] = [
-  {
-    name: 'Ceylon Gate',
-    category: 'WEB DEVELOPMENT',
-    image: '/ceylongate.png',
-    url: 'https://ceylongate.com',
-    description: 'A travel and tourism website featuring destinations, tour experiences, and a modern browsing experience.',
-  },
-  {
-    name: 'KodexLK Platform',
-    category: 'DIGITAL SERVICES & WEB SOLUTIONS',
-    image: '/kodexlk-logo.webp',
-    url: 'https://kodexlk.online',
-    description: 'A digital services platform offering website development, creative design, and customised online solutions.',
-  },
-  {
-    name: 'Alpha Crew Website',
-    category: 'PHOTOGRAPHY & WEB DEVELOPMENT',
-    image: '/alpha-crew.png',
-    url: 'https://alphacrewweb.vercel.app',
-    description: 'The online portfolio for Alpha Crew Photography, presenting portraits, events, and visual storytelling.',
-  },
-  {
-    name: 'Portfolio Website',
-    category: 'PERSONAL WEB DEVELOPMENT',
-    image: '/profile-pic.png',
-    url: 'https://kaveeth-manodhya.vercel.app',
-    description: 'My personal portfolio showcasing selected projects, technical skills, creative work, and professional experience.',
-  },
-  {
-    name: 'Travel & Tours Platform',
-    category: 'WEB DEVELOPMENT / IN PROGRESS',
-    image: '/tourism-ongoing.png',
-    description: 'An upcoming travel platform designed to make exploring destinations and planning trips more convenient.',
-    isOngoing: true,
-  },
-  {
-    name: 'MediaTools',
-    category: 'BROWSER-BASED MEDIA TOOLKIT',
-    image: '/mediatools-project.svg',
-    url: 'https://mediatoolslk.vercel.app/',
-    description: 'A suite of 11 privacy-focused tools for image conversion, video frame extraction, cropping, watermarking, GIF creation, metadata cleaning, and more. Media files are processed directly in the browser.',
-  },
-  {
-    name: 'Verity',
-    category: 'JOB & TALENT MARKETPLACE / ONGOING',
-    image: '/verity-project.svg',
-    url: 'https://github.com/kaveethmanodhya/Job-Finder',
-    description: 'An in-progress job and talent marketplace concept featuring an immersive 3D hero, floating glass cards, and glitch transitions. Job listings, talent profiles, and search remain part of its ongoing development.',
-    isOngoing: true,
-    statusLabel: 'IN DEVELOPMENT',
-  },
-];
 
 type Geometry = { enabled: boolean; distance: number; height: number };
 
-export default function HorizontalProjects() {
+export default function HorizontalProjects({details}:{details:PortfolioContent['work']}) {
+  const projects: Project[] = details.projects;
   const sectionRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -149,10 +98,10 @@ export default function HorizontalProjects() {
     >
       <div className="horizontal-projects__sticky">
         <div className="horizontal-projects__heading">
-          <div className="new-section-top"><span>03 / SELECTED WORK</span></div>
+          <div className="new-section-top"><span>{details.label}</span></div>
           <div className="horizontal-projects__heading-row">
-            <h2 className="new-big-title">THE <em>WORK.</em></h2>
-            <p>SCROLL TO EXPLORE <span aria-hidden="true">↗</span></p>
+            <h2 className="new-big-title">{details.heading} <em>{details.accent}</em></h2>
+            <p>{details.scrollHint} <span aria-hidden="true">↗</span></p>
           </div>
         </div>
 
@@ -220,7 +169,7 @@ export default function HorizontalProjects() {
         </div>
 
         <div className="horizontal-projects__footer" aria-hidden="true">
-          <span>SELECTED WORK</span>
+          <span>{details.footer}</span>
           <div className="horizontal-projects__progress">
             <motion.span style={{ scaleX: geometry.enabled ? progressX : 1 }} />
           </div>
