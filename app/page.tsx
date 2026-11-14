@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import Lenis from 'lenis';
 import dynamic from 'next/dynamic';
 import SectionBackground from '../components/SectionBackground';
+import defaults from '../data/portfolio.json';
+import type { PortfolioContent } from '../lib/portfolio';
 
 // Lazy loaded components for better performance
 const CinematicIntro = dynamic(() => import('../components/CinematicIntro'), { ssr: false });
@@ -20,12 +22,15 @@ export default function Portfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [viewCount, setViewCount] = useState<string>('---');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [content, setContent] = useState<PortfolioContent>(defaults);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mousePos = useRef({ x: 0, y: 0 });
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
   }, []);
+
+  useEffect(() => { fetch('/api/portfolio', { cache: 'no-store' }).then(r => r.json()).then(d => { if (d?.hero && d?.projects) setContent(d); }).catch(() => {}); }, []);
 
   // Admin & view count
   useEffect(() => {
@@ -39,10 +44,7 @@ export default function Portfolio() {
   };
 
   const socialLinks = [
-    { name: 'GitHub', url: 'https://github.com/kaveeth555', icon: Github, accent: '#a259ff' },
-    { name: 'YouTube', url: 'https://www.youtube.com/@MrKavvyOfficial', icon: Youtube, accent: '#ff4d8d' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/kaveeth-manodhya-b3917330a', icon: Linkedin, accent: '#4f8ef7' },
-    { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61574217495649', icon: Facebook, accent: '#4f8ef7' },
+    ...content.socialLinks.map(link => ({ ...link, icon: ({ GitHub: Github, YouTube: Youtube, LinkedIn: Linkedin, Facebook: Facebook } as Record<string, typeof Github>)[link.name] || Github }))
   ];
 
   const navItems = [
@@ -112,7 +114,7 @@ export default function Portfolio() {
   return (
     <>
       {/* ── CINEMATIC INTRO ── */}
-      {!introComplete && <CinematicIntro onComplete={handleIntroComplete} />}
+      {!introComplete && <CinematicIntro onComplete={handleIntroComplete} profileImage={content.hero.profileImage} />}
 
       {/* ── MAIN PORTFOLIO ── */}
       <div
@@ -201,7 +203,7 @@ export default function Portfolio() {
             <motion.div initial={{ opacity: 0, scale: 0.85, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.2, ease: 'easeOut' }}
               style={{ position: 'relative', width: 'clamp(340px, 90vw, 450px)', height: 'clamp(340px, 90vw, 450px)', zIndex: 0 }}
             >
-              <GlitchProfileImage startGlitch={introComplete} />
+              <GlitchProfileImage startGlitch={introComplete} profileImage={content.hero.profileImage} />
             </motion.div>
           </div>
 
@@ -209,20 +211,20 @@ export default function Portfolio() {
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
             style={{ fontFamily: 'var(--font-mono)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.35em', color: 'var(--text-muted)', marginBottom: 20, zIndex: 10, position: 'relative' }}
           >
-            Developer · Designer · Creator
+            {content.hero.eyebrow}
           </motion.p>
 
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }}
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3.5rem, 10vw, 9rem)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.03em', marginBottom: 24, zIndex: 10 }}
           >
-            <span style={{ color: '#fff' }}>HI, I&apos;M</span><br />
-            <span className="gradient-text">KAVEETH</span>
+            <span style={{ color: '#fff' }}>{content.hero.greeting}</span><br />
+            <span className="gradient-text">{content.hero.name}</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.6 }}
             style={{ maxWidth: 480, fontSize: 15, lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: 40, zIndex: 10 }}
           >
-            Building immersive digital experiences at the intersection of technology, photography, and cinematic storytelling.
+            {content.hero.description}
           </motion.p>
 
           {/* CTA buttons — properly spaced */}
@@ -236,7 +238,7 @@ export default function Portfolio() {
             }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.boxShadow = '0 8px 30px rgba(79,142,247,0.3)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none'; }}
-            >View My Work</a>
+            >{content.hero.primaryButton}</a>
             <a href="#contact" style={{
               display: 'inline-flex', alignItems: 'center', padding: '14px 32px',
               borderRadius: 999, background: 'transparent', border: '1px solid var(--border-medium)',
@@ -245,7 +247,7 @@ export default function Portfolio() {
             }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.borderColor = '#fff'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'var(--border-medium)'; }}
-            >Get In Touch</a>
+            >{content.hero.secondaryButton}</a>
           </motion.div>
 
 
@@ -263,17 +265,12 @@ export default function Portfolio() {
         <SectionBackground theme="about" style={{ padding: '80px 0' }}>
           <div id="about" style={{ maxWidth: 800, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2 }}>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 0.7 }}>
-              <p className="section-number" style={{ marginBottom: 12 }}>— About Me</p>
+              <p className="section-number" style={{ marginBottom: 12 }}>{content.about.eyebrow}</p>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1, marginBottom: 32 }}>
-                Who I Am<span className="gradient-text">.</span>
+                {content.about.heading}<span className="gradient-text">.</span>
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <p style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--text-secondary)' }}>
-                  I am an undergraduate at Wayamba University of Sri Lanka, a programmer, and a photographer working at the intersection of technology and digital media. By combining a strong technical background with a passion for cinematic storytelling, I build digital solutions and content designed to be experienced rather than just consumed.
-                </p>
-                <p style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--text-secondary)' }}>
-                  Whether developing software or producing high-quality tech reviews and travel vlogs for YouTube — my goal is to merge strategic thinking with creative vision to build truly immersive digital experiences.
-                </p>
+                {content.about.paragraphs.map((paragraph, index) => (<p key={index} style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--text-secondary)' }}>{paragraph}</p>))}
               </div>
             </motion.div>
           </div>
@@ -281,24 +278,24 @@ export default function Portfolio() {
 
         {/* ══════════ SERVICES ══════════ */}
         <SectionBackground theme="services">
-          <Services />
+          <Services items={content.services} headings={content.headings} />
         </SectionBackground>
 
         {/* ══════════ PROJECTS ══════════ */}
         <SectionBackground theme="projects">
-          <Projects />
+          <Projects items={content.projects} headings={content.headings} />
         </SectionBackground>
 
         {/* ══════════ RESUME / EXPERIENCE ══════════ */}
         <SectionBackground theme="experience">
           <div id="experience" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
-            <Resume />
+            <Resume experiencesData={content.experiences} educationData={content.education} skillsData={content.skills} statsData={content.stats} headings={content.headings} />
           </div>
         </SectionBackground>
 
         {/* ══════════ CONTACT ══════════ */}
         <SectionBackground theme="contact">
-          <Contact />
+          <Contact details={content.contact} />
         </SectionBackground>
 
         {/* ══════════ FOOTER ══════════ */}
@@ -325,7 +322,7 @@ export default function Portfolio() {
             onDoubleClick={handleSecretClick} title="© 2026 Kaveeth Manodhya"
             onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
             onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
-          >© 2026 Kaveeth Manodhya. All rights reserved.</p>
+          >{content.footer.copyright}</p>
         </footer>
       </div>
     </>
