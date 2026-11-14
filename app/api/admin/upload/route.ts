@@ -13,7 +13,7 @@ export async function POST(req:NextRequest) {
   const ext=allowed[file.type];
   if(!ext || file.size>5*1024*1024)return NextResponse.json({error:'Only PNG/JPG/WEBP/GIF under 5 MB'},{status:400});
   const repo=process.env.GITHUB_CONTENT_REPO || 'kaveethmanodhya/Kaveeth-Manodhya';
-  const branch=process.env.GITHUB_CONTENT_BRANCH || 'main';
+  const branch=process.env.GITHUB_CONTENT_BRANCH || 'redesign/scroll-film-portfolio';
   const name='admin-'+randomUUID()+'.'+ext;
   const bytes=Buffer.from(await file.arrayBuffer());
   const path='public/uploads/'+name;
