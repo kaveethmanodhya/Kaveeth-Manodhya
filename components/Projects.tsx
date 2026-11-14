@@ -85,7 +85,7 @@ export default function Projects({items,headings}:{items: PortfolioContent['proj
           <p className="section-number" style={{ marginBottom: 12 }}>{headings.projectsEyebrow}</p>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20 }}>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}>
-              My Work<span className="gradient-text">.</span>
+              {headings.projects}<span className="gradient-text">.</span>
             </h2>
             <p style={{ fontSize: 13, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
               Scroll Down <ArrowRight style={{ width: 14, height: 14 }} />
