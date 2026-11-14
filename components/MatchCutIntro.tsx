@@ -19,7 +19,6 @@ import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 
 const SKILL_START = 0.08;
 const SKILL_END = 0.745;
-const SEGMENT = (SKILL_END - SKILL_START) / 12;
 // Sparse lines create a quiet sense of vertical movement during the pinned intro.
 const FLOW_COLUMNS = [7, 17, 30, 70, 83, 93] as const;
 
@@ -110,7 +109,7 @@ export default function MatchCutIntro({details}:{details:PortfolioContent['intro
     const percent = Math.round(normalized * 100);
     const step = Math.min(
       SKILLS.length,
-      Math.max(1, Math.floor((latest - SKILL_START) / SEGMENT) + 1)
+      Math.max(1, Math.floor((latest - SKILL_START) / ((SKILL_END - SKILL_START) / SKILLS.length)) + 1)
     );
     setLoadingPercent((previous) => previous === percent ? previous : percent);
     setLoadingStep((previous) => previous === step ? previous : step);
