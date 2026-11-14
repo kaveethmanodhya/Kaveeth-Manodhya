@@ -14,7 +14,7 @@ export async function PUT(req: NextRequest) {
   let content;
   try { content=safeContent(await req.json()); } catch (error) {return NextResponse.json({error:String(error)},{status:400});}
   const repo=process.env.GITHUB_CONTENT_REPO || 'kaveethmanodhya/Kaveeth-Manodhya';
-  const branch=process.env.GITHUB_CONTENT_BRANCH || 'main';
+  const branch=process.env.GITHUB_CONTENT_BRANCH || 'redesign/scroll-film-portfolio';
   const endpoint='https://api.github.com/repos/'+repo+'/contents/data/portfolio.json';
   const headers={Authorization:'Bearer '+token,Accept:'application/vnd.github+json','Content-Type':'application/json'};
   const prior=await fetch(endpoint+'?ref='+encodeURIComponent(branch),{headers,cache:'no-store'});
