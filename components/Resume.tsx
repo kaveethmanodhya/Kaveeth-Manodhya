@@ -2,87 +2,10 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import type { PortfolioContent } from '../lib/portfolio';
 import { Briefcase, GraduationCap, MapPin, Mail, Calendar, ExternalLink } from 'lucide-react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
-const experiences = [
-  {
-    company: 'KodeXlk',
-    role: 'Founder & Developer',
-    url: '', // Add URL if known
-    logo: '/kodexlk-logo.webp',
-    period: 'December 2025 — Present',
-    location: 'Sri Lanka',
-    accentColor: 'var(--accent-cyan)',
-    borderColor: 'rgba(0, 229, 160, 0.25)',
-    description: [
-      'Founded KodeXlk to deliver high-quality digital solutions and web development services.',
-      'Lead the development of interactive web applications, focusing on performance and modern UI/UX design.',
-      'Manage client relationships and oversee project lifecycles from concept to deployment.',
-    ],
-  },
-  {
-    company: 'Alpha Crew Photography',
-    role: 'Founder & Photographer',
-    url: 'https://alphacrewweb.vercel.app',
-    logo: '/alpha-crew.png',
-    period: 'January 2023 — Present',
-    location: 'Meerigama, Western Province, Sri Lanka',
-    accentColor: 'var(--accent-blue)',
-    borderColor: 'rgba(79,142,247,0.25)',
-    description: [
-      'Founded and manage Alpha Crew, a creative photography brand focused on event, portrait, and lifestyle photography.',
-      'Oversee creative direction, client coordination, and post-production editing.',
-      'Collaborate with individuals and brands to deliver visually captivating content.',
-      "Building Alpha Crew's digital presence through social media and content creation.",
-    ],
-  },
-  {
-    company: 'Newgen Lanka Healthcare (Pvt) Ltd',
-    role: 'Quality Assurance (QA) Trainee',
-    url: '',
-    logo: '/newgen_lanka.png',
-    period: 'January 2025 — February 2025',
-    location: 'Sri Lanka',
-    accentColor: 'var(--accent-purple)',
-    borderColor: 'rgba(162,89,255,0.25)',
-    description: [
-      'Worked as a Quality Assurance trainee supporting product quality evaluation and documentation.',
-      'Assisted in maintaining compliance with manufacturing standards and conducted routine inspections.',
-      'Gained hands-on experience in quality management systems within a professional environment.',
-    ],
-  },
-];
-
-const education = [
-  {
-    institution: 'Wayamba University of Sri Lanka',
-    degree: 'B.Sc., Applied Sciences',
-    logo: '/wayamba_uni.png',
-    period: 'June 2025',
-    accentColor: 'var(--accent-cyan)',
-  },
-  {
-    institution: 'Bandaranayake College — Gampaha',
-    degree: 'Secondary Education',
-    logo: '/bandaranayake_college.png',
-    period: 'Jan 2013 — Nov 2021',
-    accentColor: 'var(--accent-pink)',
-  },
-];
-
-const skills = [
-  'Web Development',
-  'UI/UX Design',
-  'Programming',
-  'Graphic Design',
-  'React & Next.js',
-  'Frontend Engineering',
-  'Database Management (PostgreSQL, MongoDB)',
-  'Creative Direction',
-  'Cinematic Video Editing',
-  'Photography',
-];
 
 function AnimatedNumber({ end, suffix = "+" }: { end: number; suffix?: string }) {
   const ref = useRef(null);
@@ -229,7 +152,10 @@ function ExperienceCard({ exp, index, isInView }: { exp: any; index: number; isI
   );
 }
 
-export default function Resume() {
+export default function Resume({ experiencesData, educationData, skillsData, statsData, headings }: { experiencesData:PortfolioContent['experiences']; educationData:PortfolioContent['education']; skillsData:PortfolioContent['skills']; statsData:PortfolioContent['stats']; headings:PortfolioContent['headings'] }) {
+  const experiences = experiencesData.map((item,index)=>({...item,borderColor:['rgba(0, 229, 160, 0.25)','rgba(79,142,247,0.25)','rgba(162,89,255,0.25)'][index%3]}));
+  const education = educationData;
+  const skills = skillsData;
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
 
@@ -242,11 +168,11 @@ export default function Resume() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-number" style={{ marginBottom: 12 }}>— Work History</p>
+          <p className="section-number" style={{ marginBottom: 12 }}>{headings.experienceEyebrow}</p>
           <h2
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 7vw, 4.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}
           >
-            Experience
+            {headings.experience}
             <span className="gradient-text">.</span>
           </h2>
         </motion.div>
@@ -260,21 +186,21 @@ export default function Resume() {
         >
           <div className="glass-card" style={{ padding: '32px 24px', borderRadius: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
             <span style={{ fontFamily: 'var(--font-display)', fontSize: '3.5rem', fontWeight: 700, color: 'var(--accent-blue)', lineHeight: 1 }}>
-              <AnimatedNumber end={6} suffix="+" />
+              <AnimatedNumber end={statsData[0]?.value ?? 6} suffix={statsData[0]?.suffix ?? '+'} />
             </span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: 16 }}>Years Experience</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: 16 }}>{statsData[0]?.label ?? 'Years Experience'}</span>
           </div>
           <div className="glass-card" style={{ padding: '32px 24px', borderRadius: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
             <span style={{ fontFamily: 'var(--font-display)', fontSize: '3.5rem', fontWeight: 700, color: 'var(--accent-purple)', lineHeight: 1 }}>
-              <AnimatedNumber end={150} suffix="+" />
+              <AnimatedNumber end={statsData[1]?.value ?? 150} suffix={statsData[1]?.suffix ?? '+'} />
             </span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: 16 }}>Various Projects</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: 16 }}>{statsData[1]?.label ?? 'Various Projects'}</span>
           </div>
           <div className="glass-card" style={{ padding: '32px 24px', borderRadius: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
             <span style={{ fontFamily: 'var(--font-display)', fontSize: '3.5rem', fontWeight: 700, color: 'var(--accent-pink)', lineHeight: 1 }}>
-              <AnimatedNumber end={100} suffix="+" />
+              <AnimatedNumber end={statsData[2]?.value ?? 100} suffix={statsData[2]?.suffix ?? '+'} />
             </span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: 16 }}>Happy Customers</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: 16 }}>{statsData[2]?.label ?? 'Happy Customers'}</span>
           </div>
         </motion.div>
 
@@ -292,11 +218,11 @@ export default function Resume() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <p className="section-number" style={{ marginBottom: 12 }}>— Academic Background</p>
+          <p className="section-number" style={{ marginBottom: 12 }}>{headings.educationEyebrow}</p>
           <h2
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 7vw, 4.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}
           >
-            Education
+            {headings.education}
             <span className="gradient-text">.</span>
           </h2>
         </motion.div>
@@ -365,11 +291,11 @@ export default function Resume() {
           transition={{ duration: 0.6, delay: 0.5 }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
         >
-          <p className="section-number" style={{ marginBottom: 12 }}>— Capabilities</p>
+          <p className="section-number" style={{ marginBottom: 12 }}>{headings.skillsEyebrow}</p>
           <h2
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 7vw, 4.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}
           >
-            Top Skills
+            {headings.skills}
             <span className="gradient-text">.</span>
           </h2>
         </motion.div>
