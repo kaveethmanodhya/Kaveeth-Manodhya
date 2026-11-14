@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import type { PortfolioContent } from '../lib/portfolio';
 import {
   motion,
   useReducedMotion,
@@ -14,24 +15,11 @@ import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 
 // Scroll-controlled match cuts. Add or remove words here and the
 // animation will redistribute their timing without any other changes.
-const SKILLS = [
-  'CREATIVE',
-  'DESIGN',
-  'CODING',
-  'PROGRAMMING',
-  'JAVA',
-  'C++',
-  'NETWORKING',
-  'REACT',
-  'NEXT.JS',
-  'WEB DESIGN',
-  'PHOTOGRAPHY',
-  'STORYTELLING',
-] as const;
+
 
 const SKILL_START = 0.08;
 const SKILL_END = 0.745;
-const SEGMENT = (SKILL_END - SKILL_START) / SKILLS.length;
+const SEGMENT = (SKILL_END - SKILL_START) / 12;
 // Sparse lines create a quiet sense of vertical movement during the pinned intro.
 const FLOW_COLUMNS = [7, 17, 30, 70, 83, 93] as const;
 
@@ -41,38 +29,41 @@ function MatchCutWord({
   next,
   index,
   progress,
+  wordCount,
 }: {
-  word: (typeof SKILLS)[number];
+  word: string;
+  wordCount: number;
   previous: string;
   next: string;
   index: number;
   progress: MotionValue<number>;
 }) {
-  const start = SKILL_START + index * SEGMENT;
-  const end = start + SEGMENT;
+  const segment = (SKILL_END - SKILL_START) / Math.max(1,wordCount);
+  const start = SKILL_START + index * segment;
+  const end = start + segment;
   const opacity = useTransform(
     progress,
-    [start, start + SEGMENT * 0.20, start + SEGMENT * 0.78, end],
+    [start, start + segment * 0.20, start + segment * 0.78, end],
     [0, 1, 1, 0]
   );
   const y = useTransform(
     progress,
-    [start, start + SEGMENT * 0.32, start + SEGMENT * 0.76, end],
+    [start, start + segment * 0.32, start + segment * 0.76, end],
     [64, 0, 0, -58]
   );
   const scale = useTransform(
     progress,
-    [start, start + SEGMENT * 0.4, end],
+    [start, start + segment * 0.4, end],
     [0.87, 1, 1.14]
   );
   const blur = useTransform(
     progress,
-    [start, start + SEGMENT * 0.23, start + SEGMENT * 0.76, end],
+    [start, start + segment * 0.23, start + segment * 0.76, end],
     ['blur(16px)', 'blur(0px)', 'blur(0px)', 'blur(15px)']
   );
   const highlight = useTransform(
     progress,
-    [start, start + SEGMENT * 0.30, start + SEGMENT * 0.68, end],
+    [start, start + segment * 0.30, start + segment * 0.68, end],
     [0, 1, 1, 0]
   );
   const ghostShift = useTransform(
@@ -101,7 +92,8 @@ function MatchCutWord({
   );
 }
 
-export default function MatchCutIntro() {
+export default function MatchCutIntro({details}:{details:PortfolioContent['intro']}) {
+  const SKILLS=details.words.length?details.words:['CREATIVE'];
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
 
@@ -273,15 +265,15 @@ export default function MatchCutIntro() {
     return (
       <section id="home" className="mc-static">
         <div className="mc-static__copy">
-          <p className="mc-static__eyebrow">CREATIVE / CODE / PHOTOGRAPHY</p>
-          <h1>KAVEETH<br /><em>MANODHYA.</em></h1>
-          <p>Developer. Designer. Photographer.</p>
-          <p>Applied Sciences undergraduate at Wayamba University of Sri Lanka.</p>
+          <p className="mc-static__eyebrow">{details.staticEyebrow}</p>
+          <h1>{details.nameTop}<br /><em>{details.nameBottom}</em></h1>
+          <p>{details.roles}</p>
+          <p>{details.location}</p>
           <a href="#about" className="mc-final__link">ABOUT ME <ArrowUpRight size={19} /></a>
         </div>
         <div className="mc-static__portrait">
           <Image
-            src="/profile-pic.png"
+            src={details.portrait}
             fill
             priority
             alt="Portrait of Kaveeth Manodhya"
@@ -328,9 +320,9 @@ export default function MatchCutIntro() {
         </motion.div>
 
         <motion.div className="mc-opening mc-loader__intro" style={{ opacity: openingOpacity, scale: openingScale }}>
-          <span className="mc-loader__eyebrow"><i /> PERSONAL PORTFOLIO / INTRO SEQUENCE</span>
-          <h1>THE ART OF<br /><span>MAKING</span> <em>THINGS.</em></h1>
-          <p>PREPARING THE EXPERIENCE <ArrowDownRight size={16} /></p>
+          <span className="mc-loader__eyebrow"><i /> {details.eyebrow}</span>
+          <h1>{details.openingTop}<br /><span>{details.openingMiddle}</span> <em>{details.openingEnd}</em></h1>
+          <p>{details.openingHint} <ArrowDownRight size={16} /></p>
         </motion.div>
 
         <motion.div className="mc-loader-ui" style={{ opacity: loadingUiOpacity }} aria-hidden="true">
@@ -356,19 +348,20 @@ export default function MatchCutIntro() {
               next={SKILLS[(index + 1) % SKILLS.length]}
               index={index}
               progress={scrollYProgress}
+              wordCount={SKILLS.length}
             />
           ))}
         </div>
 
         <motion.div className="mc-final" style={{ visibility: finalVisibility }}>
           <motion.div className="mc-final__identity" style={{ opacity: nameOpacity, y: nameY, scale: nameScale }}>
-            <h2>KAVEETH<br /><em>MANODHYA.</em></h2>
+            <h2>{details.nameTop}<br /><em>{details.nameBottom}</em></h2>
             <motion.div className="mc-final__details" style={{ opacity: detailsOpacity, y: detailsY }}>
               <span className="mc-final__divider" aria-hidden="true" />
-              <p className="mc-final__roles">Developer <span>•</span> Designer <span>•</span> Photographer</p>
-              <p className="mc-final__location">Applied Sciences Undergraduate<br />Wayamba University of Sri Lanka</p>
+              <p className="mc-final__roles">{details.roles}</p>
+              <p className="mc-final__location">{details.location}</p>
               <a href="#about" className="mc-final__link">
-                MORE ABOUT ME <ArrowUpRight size={18} />
+                {details.aboutButton} <ArrowUpRight size={18} />
               </a>
             </motion.div>
           </motion.div>
@@ -378,7 +371,7 @@ export default function MatchCutIntro() {
             style={{ opacity: portraitOpacity, clipPath: portraitClip, scale: portraitScale }}
           >
             <Image
-              src="/profile-pic.png"
+              src={details.portrait}
               fill
               priority
               alt="Portrait of Kaveeth Manodhya"
