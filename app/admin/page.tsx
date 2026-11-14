@@ -5,17 +5,17 @@ import defaults from '../../data/portfolio.json';
 type Content = typeof defaults;
 type Item = Record<string, unknown>;
 const tabs: {key:keyof Content; title:string}[] = [
- {key:'hero',title:'Home / Hero'},{key:'about',title:'About'},{key:'headings',title:'Section Headings'},
- {key:'services',title:'Services'},{key:'projects',title:'Projects'},{key:'experiences',title:'Experience'},
- {key:'education',title:'Education'},{key:'stats',title:'Statistics'},{key:'skills',title:'Skills'},
- {key:'contact',title:'Contact'},{key:'socialLinks',title:'Social Links'},{key:'footer',title:'Footer'},{key:'seo',title:'SEO'}
+ {key:'intro',title:'Cinematic Intro'},{key:'navigation',title:'Navigation'},
+ {key:'about',title:'About Me'},{key:'expertise',title:'Expertise'},{key:'work',title:'Projects & Work'},
+ {key:'manifesto',title:'Manifesto'},{key:'journey',title:'Journey'},{key:'contact',title:'Contact'},
+ {key:'footer',title:'Footer'},{key:'seo',title:'SEO'}
 ];
 function fieldName(key:string){return key.replace(/([A-Z])/g,' $1').replace(/^./,c=>c.toUpperCase());}
 const inputStyle:React.CSSProperties={width:'100%',background:'#151a27',border:'1px solid #353d53',borderRadius:10,color:'white',padding:'11px 14px',fontSize:14,outline:'none'};
 const btn:React.CSSProperties={background:'#2d64df',border:0,borderRadius:10,color:'white',padding:'10px 16px',cursor:'pointer',fontWeight:600};
 export default function AdminPage(){
  const [password,setPassword]=useState(''),[logged,setLogged]=useState(false),[loading,setLoading]=useState(true),[saving,setSaving]=useState(false);
- const [data,setData]=useState<Content>(defaults),[tab,setTab]=useState<keyof Content>('hero'),[message,setMessage]=useState(''),[dirty,setDirty]=useState(false);
+ const [data,setData]=useState<Content>(defaults),[tab,setTab]=useState<keyof Content>('intro'),[message,setMessage]=useState(''),[dirty,setDirty]=useState(false);
  async function load(){const auth=await fetch('/api/admin/login',{cache:'no-store'}).then(r=>r.json()).catch(()=>({}));setLogged(!!auth.authenticated);
  if(auth.authenticated){const x=await fetch('/api/admin/content',{cache:'no-store'}).then(r=>r.json()).catch(()=>null);if(x&&!x.error)setData(x);}
  setLoading(false);}
@@ -32,7 +32,7 @@ export default function AdminPage(){
   if(typeof value==='boolean')return <label style={{display:'flex',gap:10,alignItems:'center'}}><input type="checkbox" checked={value} onChange={e=>onChange(e.target.checked)}/> {fieldName(key)}</label>;
   if(typeof value==='number')return <label style={{display:'block'}}><small>{fieldName(key)}</small><input style={inputStyle} type="number" value={value} onChange={e=>onChange(Number(e.target.value))}/></label>;
   if(typeof value==='string'){
-   const isImage=/^(image|logo|profileImage)$/i.test(key);
+   const isImage=/^(image|logo|profileImage|portrait)$/ii.test(key);
    return <label style={{display:'block'}}><small style={{display:'block',marginBottom:6,color:'#b6c2df'}}>{fieldName(key)}</small>
     {value.length>100||/description|summary|paragraph|copyright/i.test(key)?<textarea rows={3} style={{...inputStyle,resize:'vertical'}} value={value} onChange={e=>onChange(e.target.value)}/>:<input style={inputStyle} value={value} onChange={e=>onChange(e.target.value)}/>}
     {isImage&&<div style={{display:'flex',gap:12,alignItems:'center',marginTop:8}}><input type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={e=>{const file=e.target.files?.[0];if(file)void upload(file,p=>onChange(p));}}/>{value&&<img src={value} alt="Preview" style={{height:55,width:75,objectFit:'contain',background:'#181e31',borderRadius:6}}/>}</div>}
