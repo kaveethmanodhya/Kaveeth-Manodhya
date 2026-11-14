@@ -1023,3 +1023,68 @@ html.portfolio-intro-loading .new-footer {
   html.portfolio-intro-loading .new-nav,
   html.portfolio-intro-loading .new-footer { transition: none; }
 }
+
+
+/* Portfolio admin studio (scoped: no changes to public film portfolio). */
+.film-admin-root *, .film-admin-root *::before, .film-admin-root *::after {box-sizing:border-box;}
+.film-admin-root button,.film-admin-root input,.film-admin-root textarea,.film-admin-root select{font:inherit}
+.film-admin-shell{max-width:1450px;margin:0 auto;}
+.film-admin-header{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:10px 0 28px;padding-bottom:24px;border-bottom:1px solid #26364c}
+.film-admin-overline{color:#98b9ff;letter-spacing:.2em;font-size:11px;font-weight:800}
+.film-admin-header h1{font-size:clamp(26px,3vw,38px);letter-spacing:-.04em;margin:5px 0 6px;color:#f7f9ff}
+.film-admin-header h1 span{color:#8faefc}
+.film-admin-header p,.film-admin-toolbar p{color:#9eafcb;font-size:14px}
+.film-admin-top-actions,.film-admin-toolbar button,.film-admin-entry-actions,.film-admin-list-head button,.film-admin-upload{display:flex;align-items:center;justify-content:center;gap:9px}
+.film-admin-top-actions a{display:flex;gap:8px;align-items:center;text-decoration:none;color:#dae5fc;font-size:14px}
+.film-admin-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;align-items:start}
+.film-admin-sidebar{background:#101a2b;border:1px solid #26354d;padding:14px;border-radius:18;position:sticky;top:18px}
+.film-admin-navgroup{font-size:10px;font-weight:800;letter-spacing:.17em;color:#7186a9;margin:18px 12px 7px}
+.film-admin-navgroup:first-child{margin-top:5px}
+.film-admin-navitem{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:12px;border:0;border-radius:10px;background:transparent;color:#aebed7;cursor:pointer;font-size:13px;font-weight:600}
+.film-admin-navitem:hover{background:#1a2a42;color:white}
+.film-admin-navitem.active{background:#2855b0;color:#fff}
+.film-admin-main{min-width:0;}
+.film-admin-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.film-admin-toolbar h2{font-size:24px;font-weight:800;margin:0 0 6px}
+.film-admin-toolbar button{white-space:nowrap}
+.film-admin-edit-panel{padding:24px;border-radius:20px;border:1px solid #2b3b52;background:#101a2b}
+.film-admin-fields{display:grid;gap:20px}
+.film-admin-field{display:grid;gap:9px;color:#c8d6ee;font-size:13px;font-weight:600;min-width:0}
+.film-admin-field>span{letter-spacing:.01em}
+.film-admin-check{display:flex;align-items:center;gap:12px;color:#dbe4f4;font-size:14px;cursor:pointer}
+.film-admin-check input{width:18px;height:18px}
+.film-admin-list{display:grid;gap:12px;min-width:0}
+.film-admin-list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.film-admin-list-head strong{font-size:16px}
+.film-admin-list-head span{color:#8b9db9;font-size:13px}
+.film-admin-entry{border:1px solid #30415b;border-radius:13px;overflow:hidden;background:#111e30}
+.film-admin-entry summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:15px;gap:10px;list-style:none}
+.film-admin-entry summary::-webkit-details-marker{display:none}
+.film-admin-entry summary strong{font-size:14px;overflow-wrap:anywhere}
+.film-admin-entry-actions{margin-left:auto}
+.film-admin-entry-actions button{background:#192941;border:1px solid #33435b;color:#dce6f7;padding:7px;border-radius:8px;cursor:pointer}
+.film-admin-entry-actions button:disabled{opacity:.3;cursor:default}
+.film-admin-entry-content{padding:18px;border-top:1px solid #2b3c53}
+.film-admin-alert{display:flex;gap:10px;align-items:center;padding:12px 15px;border:1px solid #296b5d;border-radius:10px;background:#11362e;color:#b5f5dd;margin-bottom:15px;font-size:13px}
+.film-admin-alert.error{background:#391f2a;border-color:#864255;color:#ffc1cb}
+.film-admin-unsaved{color:#ffce78;font-size:13px;margin-bottom:15px}
+.film-admin-login{max-width:420px;margin:60px auto;background:#111e31;border:1px solid #324562;border-radius:22px;padding:32px;display:grid;gap:18px;box-shadow:0 20px 75px #0003}
+.film-admin-login h2{font-size:26px;margin:0}
+.film-admin-login p{color:#9cb0cc;font-size:14px}
+.film-admin-media-manager{display:grid;gap:18px}
+.film-admin-media-controls{display:grid;grid-template-columns:1fr 200px;gap:12px}
+.film-admin-media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.film-admin-media-card{background:#111d30;border:1px solid #30405c;border-radius:16px;padding:16px;min-width:0}
+.film-admin-media-card>small{font-size:12px;color:#9dacca}
+.film-admin-media-field{display:flex;align-items:flex-start;gap:16px;min-width:0;flex-wrap:wrap}
+.film-admin-media-details{display:grid;gap:9px;flex:1;min-width:180px}
+.film-admin-media-details>strong{font-size:14px}
+.film-admin-media-details>small{font-size:11px;color:#9badc9}
+.film-admin-preview{width:120px;height:105px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid #354761;border-radius:11px;background:repeating-conic-gradient(#17273b 0 25%,#21314a 0 50%) 50%/20px 20px;color:#b1c9ef;overflow:hidden}
+.film-admin-preview img{width:100%;height:100%;object-fit:contain}
+.film-admin-upload{justify-self:start;border:1px solid #3967b9;color:#cfddff;background:#1c3b6d;border-radius:10px;padding:9px 13px;font-size:12px;font-weight:700;cursor:pointer}
+.film-admin-upload input{display:none}
+@media(max-width:830px){.film-admin-layout{grid-template-columns:minmax(0,1fr)}.film-admin-sidebar{position:static;display:flex;flex-wrap:nowrap;overflow-x:auto;gap:5px;scrollbar-width:thin}.film-admin-sidebar>div{flex-shrink:0}.film-admin-navgroup{display:none}.film-admin-navitem{width:auto;white-space:nowrap;padding:11px}}
+@media(max-width:520px){.film-admin-root{padding:12px!important}.film-admin-edit-panel{padding:16px}.film-admin-media-controls{grid-template-columns:1fr}.film-admin-toolbar button{width:100%}.film-admin-preview{width:100px;height:95px}.film-admin-header{margin-top:0}}
+
+.film-company-logo{width:42px;height:42px;float:right;margin:0 0 8px 12px;border-radius:9px;overflow:hidden}.film-company-logo img{width:100%;height:100%;object-fit:contain}

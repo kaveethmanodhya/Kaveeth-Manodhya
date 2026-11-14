@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import type { PortfolioContent } from '../lib/portfolio';
 import { motion } from 'framer-motion';
 import { Send, Loader2, CheckCircle, AlertCircle, Mail, User, MessageSquare } from 'lucide-react';
 
@@ -12,7 +13,7 @@ interface FormState {
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export default function Contact() {
+export default function Contact({details}:{details:PortfolioContent['contact']}) {
   const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<Status>('idle');
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -52,13 +53,13 @@ export default function Contact() {
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
         {/* Header */}
         <div style={{ marginBottom: 64 }}>
-          <p className="section-number" style={{ marginBottom: 16 }}>— Get In Touch</p>
+          <p className="section-number" style={{ marginBottom: 16 }}>{details.formEyebrow}</p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 8vw, 5.5rem)', fontWeight: 900, color: '#fff', lineHeight: 0.95, letterSpacing: '-0.02em' }}>
-            Let&apos;s<br />
-            <span className="gradient-text">Talk.</span>
+            {details.formTop}<br />
+            <span className="gradient-text">{details.formBottom}</span>
           </h2>
           <p style={{ marginTop: 24, fontSize: 15, lineHeight: 1.7, color: 'var(--text-secondary)', maxWidth: 420 }}>
-            Have a project in mind, or just want to connect? Send a message and I&apos;ll get back to you.
+            {details.formDescription}
           </p>
         </div>
 
