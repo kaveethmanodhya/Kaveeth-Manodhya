@@ -32,7 +32,7 @@ export default function AdminPage(){
   if(typeof value==='boolean')return <label style={{display:'flex',gap:10,alignItems:'center'}}><input type="checkbox" checked={value} onChange={e=>onChange(e.target.checked)}/> {fieldName(key)}</label>;
   if(typeof value==='number')return <label style={{display:'block'}}><small>{fieldName(key)}</small><input style={inputStyle} type="number" value={value} onChange={e=>onChange(Number(e.target.value))}/></label>;
   if(typeof value==='string'){
-   const isImage=/^(image|logo|profileImage|portrait)$/ii.test(key);
+   const isImage=/^(image|logo|profileImage|portrait)$/i.test(key);
    return <label style={{display:'block'}}><small style={{display:'block',marginBottom:6,color:'#b6c2df'}}>{fieldName(key)}</small>
     {value.length>100||/description|summary|paragraph|copyright/i.test(key)?<textarea rows={3} style={{...inputStyle,resize:'vertical'}} value={value} onChange={e=>onChange(e.target.value)}/>:<input style={inputStyle} value={value} onChange={e=>onChange(e.target.value)}/>}
     {isImage&&<div style={{display:'flex',gap:12,alignItems:'center',marginTop:8}}><input type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={e=>{const file=e.target.files?.[0];if(file)void upload(file,p=>onChange(p));}}/>{value&&<img src={value} alt="Preview" style={{height:55,width:75,objectFit:'contain',background:'#181e31',borderRadius:6}}/>}</div>}
