@@ -1086,3 +1086,5 @@ html.portfolio-intro-loading .new-footer {
 .film-admin-upload input{display:none}
 @media(max-width:830px){.film-admin-layout{grid-template-columns:minmax(0,1fr)}.film-admin-sidebar{position:static;display:flex;flex-wrap:nowrap;overflow-x:auto;gap:5px;scrollbar-width:thin}.film-admin-sidebar>div{flex-shrink:0}.film-admin-navgroup{display:none}.film-admin-navitem{width:auto;white-space:nowrap;padding:11px}}
 @media(max-width:520px){.film-admin-root{padding:12px!important}.film-admin-edit-panel{padding:16px}.film-admin-media-controls{grid-template-columns:1fr}.film-admin-toolbar button{width:100%}.film-admin-preview{width:100px;height:95px}.film-admin-header{margin-top:0}}
+
+.film-company-logo{width:42px;height:42px;float:right;margin:0 0 8px 12px;border-radius:9px;overflow:hidden}.film-company-logo img{width:100%;height:100%;object-fit:contain}
