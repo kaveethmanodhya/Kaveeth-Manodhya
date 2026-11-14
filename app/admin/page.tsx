@@ -49,6 +49,9 @@ function mediaEntries(data: Content) {
  for(let i=0;i<data.work.projects.length;i++){
   entries.push({key:'projects' as MediaCategory,title:data.work.projects[i].name || 'Untitled Project',description:'Project cover image',section:'work' as Section,path:['projects',i,'image']});
  }
+ for(let i=0;i<data.journey.experience.length;i++){
+  entries.push({key:'logos' as MediaCategory,title:data.journey.experience[i].name || 'Company Logo',description:'Company or employer logo',section:'journey' as Section,path:['experience',i,'logo']});
+ }
  for(let i=0;i<data.journey.education.length;i++){
   entries.push({key:'education' as MediaCategory,title:data.journey.education[i].name || 'Education Logo',description:'Institution logo',section:'journey' as Section,path:['education',i,'image']});
  }
@@ -159,7 +162,7 @@ export default function AdminPage(){
   if(typeof value==='number')return <label className="film-admin-field"><span>{humanize(key)}</span><input style={inputStyle} type="number" value={value} onChange={e=>update(Number(e.target.value))}/></label>;
   if(typeof value==='string'){
    if(/^(image|logo|profileImage|portrait)$/i.test(key)){
-    const cat:MediaCategory=section==='work'?'projects':section==='journey'&&key==='image'?'education':'profile';
+    const cat:MediaCategory=section==='work'?'projects':section==='journey'&&key==='image'?'education':key==='logo'?'logos':'profile';
     return imageField(section,path,humanize(key),cat);
    }
    const multiline=value.length>100||/description|paragraph|desc|copyright|summary|location/i.test(key);
@@ -214,7 +217,7 @@ export default function AdminPage(){
        <div className="film-admin-media-manager">
         <div className="film-admin-media-controls"><input style={inputStyle} placeholder="Search images, projects or logos…" value={search} onChange={e=>setSearch(e.target.value)}/>
          <select style={inputStyle} value={mediaTab} onChange={e=>setMediaTab(e.target.value as 'all'|MediaCategory)}>
-          <option value="all">All Images</option><option value="profile">Profile Portraits</option><option value="projects">Project Covers</option><option value="education">Education Logos</option>
+          <option value="all">All Images</option><option value="profile">Profile Portraits</option><option value="projects">Project Covers</option><option value="education">Education Logos</option><option value="logos">Company Logos</option>
          </select></div>
         <div className="film-admin-media-grid">{filteredMedia.map(item=><div className="film-admin-media-card" key={item.section+item.path.join('.')}>{imageField(item.section,item.path,item.title,item.key)}<small>{item.description}</small></div>)}</div>
         {filteredMedia.length===0&&<p>No matching media found.</p>}
