@@ -20,10 +20,10 @@ export async function getPortfolioContent(): Promise<PortfolioContent> {
 export function safeContent(input: unknown): PortfolioContent {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Invalid portfolio data');
   const result = input as PortfolioContent;
-  const necessary = ['hero','about','headings','services','projects','experiences','education','stats','skills','contact','socialLinks','footer','seo'];
+  const necessary = ['intro','navigation','about','expertise','work','manifesto','journey','contact','footer','seo'];
   for (const name of necessary) if (!(name in result)) throw new Error('Missing section: ' + name);
   if (JSON.stringify(result).length > 250000) throw new Error('Portfolio data exceeds size limit');
-  const arrays = ['services','projects','experiences','education','stats','skills','socialLinks'];
+  const arrays = [];
   for (const key of arrays) if (!Array.isArray((result as unknown as Record<string, unknown>)[key])) throw new Error('Invalid list: ' + key);
   return result;
 }
