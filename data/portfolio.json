@@ -1,0 +1,296 @@
+{
+  "hero": {
+    "eyebrow": "Developer · Designer · Creator",
+    "greeting": "HI, I'M",
+    "name": "KAVEETH",
+    "description": "Building immersive digital experiences at the intersection of technology, photography, and cinematic storytelling.",
+    "profileImage": "/profile-v2.webp",
+    "primaryButton": "View My Work",
+    "secondaryButton": "Get In Touch"
+  },
+  "about": {
+    "eyebrow": "— About Me",
+    "heading": "Who I Am",
+    "paragraphs": [
+      "I am an undergraduate at Wayamba University of Sri Lanka, a programmer, and a photographer working at the intersection of technology and digital media. By combining a strong technical background with a passion for cinematic storytelling, I build digital solutions and content designed to be experienced rather than just consumed.",
+      "Whether developing software or producing high-quality tech reviews and travel vlogs for YouTube — my goal is to merge strategic thinking with creative vision to build truly immersive digital experiences."
+    ]
+  },
+  "headings": {
+    "servicesEyebrow": "— What I Do",
+    "services": "Services",
+    "projectsEyebrow": "— Selected Work",
+    "projects": "Projects",
+    "experienceEyebrow": "— Work History",
+    "experience": "Experience",
+    "educationEyebrow": "— Academic Background",
+    "education": "Education",
+    "skillsEyebrow": "— Capabilities",
+    "skills": "Top Skills"
+  },
+  "services": [
+    {
+      "title": "Programming",
+      "summary": "Full-stack development with Java, C, and modern web frameworks.",
+      "capabilities": [
+        "Full-stack web applications (Next.js, React)",
+        "Backend APIs & databases (Node.js, MongoDB)",
+        "Java & C software engineering",
+        "UI/UX implementation with pixel-perfect accuracy",
+        "Performance optimization & clean code architecture"
+      ],
+      "tags": [
+        "Java",
+        "C",
+        "React",
+        "Next.js",
+        "Node.js",
+        "MongoDB"
+      ]
+    },
+    {
+      "title": "Photography & Retouching",
+      "summary": "Professional photography and advanced Adobe Photoshop editing.",
+      "capabilities": [
+        "Event, portrait & lifestyle photography",
+        "Advanced Photoshop compositing & stitching",
+        "High-resolution editing & colour grading",
+        "Alpha Crew Photography brand creative direction",
+        "Product photography & brand identity visuals"
+      ],
+      "tags": [
+        "Photoshop",
+        "Lightroom",
+        "Compositing"
+      ]
+    },
+    {
+      "title": "Digital Content Creation",
+      "summary": "YouTube production, graphic design, and social media content.",
+      "capabilities": [
+        "YouTube video production (tech reviews & travel vlogs)",
+        "Thumbnail & banner design for maximum CTR",
+        "Motion graphics & video editing",
+        "Social media strategy & channel growth",
+        "Brand identity design & flyer creation"
+      ],
+      "tags": [
+        "YouTube",
+        "Premiere Pro",
+        "After Effects",
+        "Graphic Design"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Ceylon Gate",
+      "category": "Web Development",
+      "image": "/ceylongate.png",
+      "url": "https://ceylongate.com",
+      "githubUrl": "",
+      "description": "Travel and tourism website for Ceylon Gate, showcasing tours, destinations, and booking capabilities.",
+      "tags": [
+        "Next.js",
+        "PostgreSQL",
+        "Framer Motion",
+        "Cloudinary"
+      ],
+      "accentColor": "#ff4d8d",
+      "isOngoing": false
+    },
+    {
+      "title": "Kodexlk Platform",
+      "category": "Web Platform",
+      "image": "/kodexlk-logo.webp",
+      "url": "https://kodexlk.online",
+      "githubUrl": "https://github.com/kaveethmanodhya/Kodexlk",
+      "description": "Modern web platform & admin dashboard for digital invitations and event management.",
+      "tags": [
+        "Next.js",
+        "MongoDB",
+        "Cloudinary"
+      ],
+      "accentColor": "#00d4ff",
+      "isOngoing": false
+    },
+    {
+      "title": "Alpha Crew Website",
+      "category": "Web Development",
+      "image": "/alpha-crew.png",
+      "url": "https://alphacrewweb.vercel.app",
+      "githubUrl": "https://github.com/kaveeth555/ALPHA-Crew-Website",
+      "description": "Official portfolio website for Alpha Crew Photography — event, portrait & lifestyle photography brand.",
+      "tags": [
+        "Next.js",
+        "React",
+        "Cloudinary"
+      ],
+      "accentColor": "#4f8ef7",
+      "isOngoing": false
+    },
+    {
+      "title": "Portfolio Website",
+      "category": "Web Development",
+      "image": "/profile-v2.webp",
+      "url": "https://kaveeth-manodhya.vercel.app",
+      "githubUrl": "https://github.com/kaveeth555/Kaveeth-Manodhya",
+      "description": "Personal portfolio showcasing skills, projects & professional experience.",
+      "tags": [
+        "Next.js",
+        "GSAP",
+        "Framer Motion"
+      ],
+      "accentColor": "#a259ff",
+      "isOngoing": false
+    },
+    {
+      "title": "Travel & Tours Platform",
+      "category": "Web Development (Ongoing)",
+      "image": "/tourism-ongoing.png",
+      "url": "",
+      "githubUrl": "",
+      "description": "An upcoming comprehensive tourism platform currently in development, focusing on seamless travel experiences.",
+      "tags": [
+        "Next.js",
+        "React",
+        "Tailwind CSS"
+      ],
+      "accentColor": "#f59e0b",
+      "isOngoing": true
+    }
+  ],
+  "experiences": [
+    {
+      "company": "KodeXlk",
+      "role": "Founder & Developer",
+      "url": "",
+      "logo": "/kodexlk-logo.webp",
+      "period": "December 2025 — Present",
+      "location": "Sri Lanka",
+      "accentColor": "var(--accent-cyan)",
+      "description": [
+        "Founded KodeXlk to deliver high-quality digital solutions and web development services.",
+        "Lead the development of interactive web applications, focusing on performance and modern UI/UX design.",
+        "Manage client relationships and oversee project lifecycles from concept to deployment."
+      ]
+    },
+    {
+      "company": "Alpha Crew Photography",
+      "role": "Founder & Photographer",
+      "url": "https://alphacrewweb.vercel.app",
+      "logo": "/alpha-crew.png",
+      "period": "January 2023 — Present",
+      "location": "Meerigama, Western Province, Sri Lanka",
+      "accentColor": "var(--accent-blue)",
+      "description": [
+        "Founded and manage Alpha Crew, a creative photography brand focused on event, portrait, and lifestyle photography.",
+        "Oversee creative direction, client coordination, and post-production editing.",
+        "Collaborate with individuals and brands to deliver visually captivating content.",
+        "Building Alpha Crew's digital presence through social media and content creation."
+      ]
+    },
+    {
+      "company": "Newgen Lanka Healthcare (Pvt) Ltd",
+      "role": "Quality Assurance (QA) Trainee",
+      "url": "",
+      "logo": "/newgen_lanka.png",
+      "period": "January 2025 — February 2025",
+      "location": "Sri Lanka",
+      "accentColor": "var(--accent-purple)",
+      "description": [
+        "Worked as a Quality Assurance trainee supporting product quality evaluation and documentation.",
+        "Assisted in maintaining compliance with manufacturing standards and conducted routine inspections.",
+        "Gained hands-on experience in quality management systems within a professional environment."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Wayamba University of Sri Lanka",
+      "degree": "B.Sc., Applied Sciences",
+      "logo": "/wayamba_uni.png",
+      "period": "June 2025",
+      "accentColor": "var(--accent-cyan)"
+    },
+    {
+      "institution": "Bandaranayake College — Gampaha",
+      "degree": "Secondary Education",
+      "logo": "/bandaranayake_college.png",
+      "period": "Jan 2013 — Nov 2021",
+      "accentColor": "var(--accent-pink)"
+    }
+  ],
+  "stats": [
+    {
+      "value": 6,
+      "suffix": "+",
+      "label": "Years Experience"
+    },
+    {
+      "value": 150,
+      "suffix": "+",
+      "label": "Various Projects"
+    },
+    {
+      "value": 100,
+      "suffix": "+",
+      "label": "Happy Customers"
+    }
+  ],
+  "skills": [
+    "Web Development",
+    "UI/UX Design",
+    "Programming",
+    "Graphic Design",
+    "React & Next.js",
+    "Frontend Engineering",
+    "Database Management (PostgreSQL, MongoDB)",
+    "Creative Direction",
+    "Cinematic Video Editing",
+    "Photography"
+  ],
+  "contact": {
+    "eyebrow": "— Get In Touch",
+    "headlineTop": "Let's",
+    "headlineBottom": "Talk.",
+    "description": "Have a project in mind, or just want to connect? Send a message and I'll get back to you."
+  },
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/kaveeth555",
+      "accent": "#a259ff"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@MrKavvyOfficial",
+      "accent": "#ff4d8d"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/kaveeth-manodhya-b3917330a",
+      "accent": "#4f8ef7"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/profile.php?id=61574217495649",
+      "accent": "#4f8ef7"
+    }
+  ],
+  "footer": {
+    "copyright": "© 2026 Kaveeth Manodhya. All rights reserved."
+  },
+  "seo": {
+    "title": "Kaveeth Manodhya — Developer, Designer & Content Creator",
+    "description": "Personal portfolio of Kaveeth Manodhya — undergraduate at Wayamba University of Sri Lanka, full-stack developer, photographer, and YouTube content creator (Mr Kavvy).",
+    "keywords": [
+      "Kaveeth Manodhya",
+      "Mr Kavvy",
+      "portfolio",
+      "developer",
+      "photographer",
+      "Sri Lanka"
+    ]
+  }
+}
