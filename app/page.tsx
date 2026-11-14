@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
+import defaults from '../data/portfolio.json';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowDownRight, Menu, X, Github, Linkedin } from 'lucide-react';
@@ -9,55 +10,6 @@ import SmoothScroll from '../components/SmoothScroll';
 import Contact from '../components/Contact';
 import HorizontalProjects from '../components/HorizontalProjects';
 
-const disciplines = [
-  {
-    num: '01',
-    title: 'DEVELOPMENT',
-    desc: 'Ideas made functional. Java, C, C++, React, Next.js, Node.js, databases, and networking.',
-    tags: ['Java', 'C / C++', 'React', 'Next.js', 'Networking'],
-  },
-  {
-    num: '02',
-    title: 'PHOTOGRAPHY',
-    desc: 'The art of seeing. Portraits, events, image editing, retouching, and the stories that linger.',
-    tags: ['Photography', 'Lightroom', 'Photoshop', 'Retouching'],
-  },
-  {
-    num: '03',
-    title: 'DIGITAL SERVICES',
-    desc: 'Web solutions, creative design, media production, and digital experiences tailored to different needs.',
-    tags: ['Web Solutions', 'Graphic Design', 'Video', 'Creative Services'],
-  },
-];
-
-const experience = [
-  { period: '2025 — PRESENT', name: 'KodexLK', role: 'Founder and Developer' },
-  { period: '2023 — PRESENT', name: 'Alpha Crew Photography', role: 'Founder and Photographer' },
-  { period: '2025', name: 'Newgen Lanka Healthcare', role: 'Quality Assurance Trainee' },
-];
-
-const education = [
-  {
-    period: '2025 — PRESENT',
-    name: 'Wayamba University of Sri Lanka',
-    qualification: 'B.Sc. Applied Sciences undergraduate',
-    image: '/wayamba_uni.png',
-  },
-  {
-    period: '2013 — 2021',
-    name: 'Bandaranayake College, Gampaha',
-    qualification: 'Secondary Education',
-    image: '/bandaranayake_college.png',
-  },
-];
-
-const nav = [
-  ['About', '#about'],
-  ['Expertise', '#expertise'],
-  ['Work', '#work'],
-  ['Journey', '#journey'],
-  ['Contact', '#contact'],
-];
 
 function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
@@ -75,22 +27,26 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
 
 export default function Portfolio() {
   const [menu, setMenu] = useState(false);
+  const [content, setContent] = useState(defaults);
+  useEffect(() => { fetch('/api/portfolio', {cache:'no-store'}).then(r=>r.json()).then(d=>{if(d?.intro&&d?.work)setContent(d);}).catch(()=>{}); }, []);
+  const {intro,navigation,about,expertise,work,manifesto,journey,contact,footer}=content;
+  const nav=navigation.items;
 
   return (
     <main className="new-portfolio">
       <SmoothScroll />
 
       <header className="new-nav">
-        <a className="new-logo" href="#home" aria-label="Home">KM<span>.</span></a>
+        <a className="new-logo" href="#home" aria-label="Home">{navigation.logo}<span>.</span></a>
 
         <nav className="new-desktop-nav" aria-label="Main navigation">
-          {nav.slice(0, 4).map(([name, href]) => (
+          {nav.slice(0, 4).map(({name, href}) => (
             <a href={href} key={href}>{name}</a>
           ))}
         </nav>
 
         <a className="new-nav-contact" href="#contact">
-          LET'S TALK <ArrowUpRight size={16} />
+          {navigation.contactButton} <ArrowUpRight size={16} />
         </a>
 
         <button
@@ -105,7 +61,7 @@ export default function Portfolio() {
 
         {menu && (
           <nav className="new-mobile-nav" aria-label="Mobile navigation">
-            {nav.map(([name, href]) => (
+            {nav.map(({name, href}) => (
               <a href={href} key={href} onClick={() => setMenu(false)}>
                 {name} <ArrowUpRight size={17} />
               </a>
@@ -114,32 +70,20 @@ export default function Portfolio() {
         )}
       </header>
 
-      <MatchCutIntro />
+      <MatchCutIntro details={intro} />
 
       <section id="about" className="new-section new-about">
         <Reveal>
-          <div className="new-section-top"><span>01 / THE PERSON</span></div>
+          <div className="new-section-top"><span>{about.label}</span></div>
           <div className="new-about-layout">
             <div>
               <h2>
-                I BUILD WITH <span>LOGIC.</span><br />
-                I CREATE WITH <em>FEELING.</em>
+                {about.headingFirst} <span>{about.headingFirstAccent}</span><br />
+                {about.headingSecond} <em>{about.headingSecondAccent}</em>
               </h2>
               <div className="new-about-bottom">
-                <p>
-                  I am Kaveeth Manodhya, an Applied Sciences undergraduate at Wayamba University
-                  of Sri Lanka with a strong interest in programming, technology, and creative media.
-                  I enjoy turning ideas into useful digital experiences, from developing websites
-                  and working with software to finding fresh ways to solve technical problems.
-                </p>
-                <p>
-                  Beyond coding, photography and visual storytelling are an important part of
-                  what I do. Through my creative work, I explore composition, editing, design,
-                  and the details that make an experience memorable. I am always learning,
-                  experimenting with new tools, and finding ways to bring technical thinking
-                  and creativity together.
-                </p>
-                <a href="#expertise">WHAT I DO <ArrowDownRight size={18} /></a>
+                {about.paragraphs.map((paragraph,index)=><p key={index}>{paragraph}</p>)}
+                <a href="#expertise">{about.button} <ArrowDownRight size={18} /></a>
               </div>
             </div>
           </div>
@@ -148,10 +92,10 @@ export default function Portfolio() {
 
       <section id="expertise" className="new-section new-expertise">
         <Reveal>
-          <div className="new-section-top"><span>02 / EXPERTISE</span></div>
-          <h2 className="new-big-title">WHAT I <em>DO.</em></h2>
+          <div className="new-section-top"><span>{expertise.label}</span></div>
+          <h2 className="new-big-title">{expertise.heading} <em>{expertise.accent}</em></h2>
         </Reveal>
-        {disciplines.map(d => (
+        {expertise.items.map(d => (
           <Reveal key={d.num}>
             <article className="new-discipline">
               <span>{d.num}</span>
@@ -168,26 +112,22 @@ export default function Portfolio() {
         ))}
       </section>
 
-      <HorizontalProjects />
+      <HorizontalProjects details={work} />
 
       <section className="new-manifesto">
         <Reveal>
-          <p>THE BEST IDEAS<br />LIVE <em>BETWEEN</em><br />DISCIPLINES<span>.</span></p>
+          <p>{manifesto.lines[0]}<br />{manifesto.lines[1]} <em>{manifesto.lines[2]}</em><br />{manifesto.lines[3]}<span>.</span></p>
         </Reveal>
       </section>
 
       <section id="journey" className="new-section new-journey">
         <Reveal>
-          <div className="new-section-top"><span>04 / MY JOURNEY</span></div>
-          <h2 className="new-big-title">SO FAR<span>.</span></h2>
+          <div className="new-section-top"><span>{journey.label}</span></div>
+          <h2 className="new-big-title">{journey.heading}<span>.</span></h2>
         </Reveal>
 
         <div className="new-stats" aria-label="Portfolio statistics">
-          {[
-            { number: '6+', label: 'Years Experience' },
-            { number: '150+', label: 'Various Projects' },
-            { number: '100+', label: 'Happy Customers' },
-          ].map(item => (
+          {journey.stats.map(item => (
             <Reveal key={item.label} className="new-stat">
               <strong>{item.number}</strong>
               <span>{item.label}</span>
@@ -198,7 +138,7 @@ export default function Portfolio() {
         <div className="new-journey-grid">
           <Reveal className="new-journey-image">
             <Image
-              src="/profile-pic.png"
+              src={journey.portrait}
               fill
               sizes="(max-width: 850px) 90vw, 35vw"
               alt="Portrait of Kaveeth Manodhya"
@@ -206,9 +146,9 @@ export default function Portfolio() {
           </Reveal>
 
           <div className="new-journey-content">
-            <Reveal><h3 className="new-journey-heading">Experience</h3></Reveal>
+            <Reveal><h3 className="new-journey-heading">{journey.experienceHeading}</h3></Reveal>
             <div className="new-timeline">
-              {experience.map(item => (
+              {journey.experience.map(item => (
                 <Reveal key={item.name}>
                   <div className="new-timeline-row">
                     <span>{item.period}</span>
@@ -221,9 +161,9 @@ export default function Portfolio() {
               ))}
             </div>
 
-            <Reveal><h3 className="new-journey-heading new-education-heading">Education</h3></Reveal>
+            <Reveal><h3 className="new-journey-heading new-education-heading"{journey.educationHeading}</h3></Reveal>
             <div className="new-education-list">
-              {education.map(item => (
+              {journey.education.map(item => (
                 <Reveal key={item.name}>
                   <div className="new-education-row">
                     <div className="new-education-logo">
@@ -245,21 +185,20 @@ export default function Portfolio() {
       <section id="contact" className="new-contact">
         <div className="new-section">
           <Reveal>
-            <div className="new-section-top"><span>05 / SAY HELLO</span></div>
-            <h2>GOT AN <em>IDEA?</em><br />LET'S MAKE <span>IT REAL.</span></h2>
+            <div className="new-section-top"><span>{contact.label}</span></div>
+            <h2>{contact.headingOne} <em>{contact.headingAccentOne}</em><br />{contact.headingTwo} <span>{contact.headingAccentTwo}</span></h2>
             <div className="new-contact-social">
-              <a href="https://github.com/kaveethmanodhya" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><Github /></a>
-              <a href="https://www.linkedin.com/in/kaveeth-manodhya-b3917330a" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><Linkedin /></a>
+              {contact.socialLinks.map(link=><a key={link.name} href={link.url} aria-label={link.name} target="_blank" rel="noopener noreferrer">{link.name.toLowerCase()==='linkedin'?<Linkedin/>:<Github/>}</a>)}
             </div>
           </Reveal>
-          <div className="new-contact-form"><Contact /></div>
+          <div className="new-contact-form"><Contact details={contact} /></div>
         </div>
       </section>
 
       <footer className="new-footer">
-        <a href="#home" className="new-logo">KM<span>.</span></a>
-        <p>© 2026 KAVEETH MANODHYA</p>
-        <a href="#home">BACK TO TOP ↑</a>
+        <a href="#home" className="new-logo">{navigation.logo}<span>.</span></a>
+        <p>{footer.copyright}</p>
+        <a href="#home">{footer.backToTop}</a>
       </footer>
     </main>
   );
