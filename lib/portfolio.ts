@@ -23,7 +23,15 @@ export function safeContent(input: unknown): PortfolioContent {
   const necessary = ['intro','navigation','about','expertise','work','manifesto','journey','contact','footer','seo'];
   for (const name of necessary) if (!(name in result)) throw new Error('Missing section: ' + name);
   if (JSON.stringify(result).length > 250000) throw new Error('Portfolio data exceeds size limit');
-  const arrays = [];
-  for (const key of arrays) if (!Array.isArray((result as unknown as Record<string, unknown>)[key])) throw new Error('Invalid list: ' + key);
+  const arrayFields: Array<[string, string]> = [
+    ['intro', 'words'], ['navigation', 'items'], ['about', 'paragraphs'],
+    ['expertise', 'items'], ['work', 'projects'], ['manifesto', 'lines'],
+    ['journey', 'stats'], ['journey', 'experience'], ['journey', 'education'],
+    ['contact', 'socialLinks'], ['seo', 'keywords']
+  ];
+  const sections = result as unknown as Record<string, Record<string, unknown>>;
+  for (const [section, field] of arrayFields) {
+    if (!Array.isArray(sections[section]?.[field])) throw new Error('Invalid list: ' + section + '.' + field);
+  }
   return result;
 }
