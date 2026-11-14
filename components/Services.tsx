@@ -3,62 +3,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code2, Camera, Youtube, ChevronRight } from 'lucide-react';
+import type { PortfolioContent } from '../lib/portfolio';
 
-const services = [
-  {
-    number: '01',
-    title: 'Programming',
-    icon: Code2,
-    accentColor: 'var(--accent-blue)',
-    gradient: 'linear-gradient(135deg, rgba(79,142,247,0.08) 0%, rgba(162,89,255,0.04) 100%)',
-    borderColor: 'rgba(79,142,247,0.3)',
-    summary: 'Full-stack development with Java, C, and modern web frameworks.',
-    capabilities: [
-      'Full-stack web applications (Next.js, React)',
-      'Backend APIs & databases (Node.js, MongoDB)',
-      'Java & C software engineering',
-      'UI/UX implementation with pixel-perfect accuracy',
-      'Performance optimization & clean code architecture',
-    ],
-    tags: ['Java', 'C', 'React', 'Next.js', 'Node.js', 'MongoDB'],
-  },
-  {
-    number: '02',
-    title: 'Photography & Retouching',
-    icon: Camera,
-    accentColor: 'var(--accent-purple)',
-    gradient: 'linear-gradient(135deg, rgba(162,89,255,0.08) 0%, rgba(255,77,141,0.04) 100%)',
-    borderColor: 'rgba(162,89,255,0.3)',
-    summary: 'Professional photography and advanced Adobe Photoshop editing.',
-    capabilities: [
-      'Event, portrait & lifestyle photography',
-      'Advanced Photoshop compositing & stitching',
-      'High-resolution editing & colour grading',
-      'Alpha Crew Photography brand creative direction',
-      'Product photography & brand identity visuals',
-    ],
-    tags: ['Photoshop', 'Lightroom', 'Compositing'],
-  },
-  {
-    number: '03',
-    title: 'Digital Content Creation',
-    icon: Youtube,
-    accentColor: 'var(--accent-pink)',
-    gradient: 'linear-gradient(135deg, rgba(255,77,141,0.08) 0%, rgba(255,100,60,0.04) 100%)',
-    borderColor: 'rgba(255,77,141,0.3)',
-    summary: 'YouTube production, graphic design, and social media content.',
-    capabilities: [
-      'YouTube video production (tech reviews & travel vlogs)',
-      'Thumbnail & banner design for maximum CTR',
-      'Motion graphics & video editing',
-      'Social media strategy & channel growth',
-      'Brand identity design & flyer creation',
-    ],
-    tags: ['YouTube', 'Premiere Pro', 'After Effects', 'Graphic Design'],
-  },
-];
 
-export default function Services() {
+export default function Services({items,headings}:{items:PortfolioContent['services'];headings:PortfolioContent['headings']}) {
+  const services = items.map((item,index) => ({...item, number:String(index+1).padStart(2,'0'),icon:[Code2,Camera,Youtube][index%3],accentColor:['var(--accent-blue)','var(--accent-purple)','var(--accent-pink)'][index%3],gradient:['linear-gradient(135deg, rgba(79,142,247,0.08), rgba(162,89,255,0.04))','linear-gradient(135deg, rgba(162,89,255,0.08), rgba(255,77,141,0.04))','linear-gradient(135deg, rgba(255,77,141,0.08), rgba(255,100,60,0.04))'][index%3],borderColor:['rgba(79,142,247,0.3)','rgba(162,89,255,0.3)','rgba(255,77,141,0.3)'][index%3]}));
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -69,9 +18,9 @@ export default function Services() {
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
         {/* Section header */}
         <div style={{ marginBottom: 56 }}>
-          <p className="section-number" style={{ marginBottom: 12 }}>— What I Do</p>
+          <p className="section-number" style={{ marginBottom: 12 }}>{headings.servicesEyebrow}</p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1 }}>
-            Services<span className="gradient-text">.</span>
+            {headings.services}<span className="gradient-text">.</span>
           </h2>
         </div>
 
