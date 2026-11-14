@@ -161,7 +161,7 @@ export default function Portfolio() {
               ))}
             </div>
 
-            <Reveal><h3 className="new-journey-heading new-education-heading"{journey.educationHeading}</h3></Reveal>
+            <Reveal><h3 className="new-journey-heading new-education-heading">{journey.educationHeading}</h3></Reveal>
             <div className="new-education-list">
               {journey.education.map(item => (
                 <Reveal key={item.name}>
